@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1.0" name="viewport"/>
+<title>آزمایشگاه عملی فرانت‌اند با هوش مصنوعی | نسخه ارائه</title>
+<style>
+:root{
+  --bg:#f7f9ff;--card:#fff;--text:#141a33;--muted:#64708a;--primary:#3b3fd6;
+  --secondary:#7b3ff2;--accent:#ffd166;--success:#12a150;--danger:#e5484d;
+  --line:#e4e8f2;--shadow:0 12px 35px rgba(20,26,51,.08);--r:20px
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Vazirmatn,Tahoma,Arial,sans-serif;line-height:1.8}
+button,input,textarea,select{font:inherit} button{cursor:pointer}
+a{text-decoration:none;color:inherit}.container{width:min(1180px,92%);margin:auto}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(247,249,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-weight:900;display:flex;align-items:center;gap:10px}.logo-badge{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;display:grid;place-items:center}
+.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks a,.navlinks button{border:0;background:transparent;padding:8px 12px;border-radius:12px;color:var(--muted)}.navlinks a:hover,.navlinks button:hover{background:#fff;color:var(--primary)}
+.hero{padding:70px 0 35px;background:radial-gradient(circle at 15% 10%,#e6e8ff 0,transparent 34%),radial-gradient(circle at 90% 20%,#f0e6ff 0,transparent 30%)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.badge{display:inline-flex;padding:6px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--primary);font-weight:800}
+h1{font-size:clamp(34px,6vw,64px);line-height:1.1;margin:16px 0}.hero p{font-size:18px;color:var(--muted);max-width:760px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.btn{border:0;border-radius:14px;padding:12px 18px;font-weight:800;transition:.3s}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#fff;color:var(--primary);border:1px solid var(--line)}.btn:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(59,63,214,.18)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:24px}.stat{background:#fff;border:1px solid var(--line);padding:14px;border-radius:16px;text-align:center}.stat b{display:block;font-size:25px}
+.hero-card{background:#141a33;color:#fff;border-radius:28px;padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero-card:before{content:"";position:absolute;width:190px;height:190px;border-radius:50%;background:#3b3fd6;filter:blur(25px);opacity:.55;top:-80px;left:-60px}.terminal{position:relative;background:#0b1025;border:1px solid #2c3558;border-radius:18px;padding:18px;font-family:monospace;direction:ltr;text-align:left;color:#dbe2ff}.terminal span{display:block}.green{color:#70e000}.yellow{color:#ffd166}.purple{color:#b79cff}
+section{padding:42px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:18px}.section-head h2{margin:0;font-size:30px}.muted{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}.grid-2{grid-template-columns:repeat(2,1fr)}.grid-3{grid-template-columns:repeat(3,1fr)}.grid-4{grid-template-columns:repeat(4,1fr)}
+.chapter{scroll-margin-top:90px}.chapter-card{height:100%;position:relative;overflow:hidden}.chapter-no{font-size:13px;color:var(--primary);font-weight:900}.chapter-card h3{margin:5px 0 8px}.chapter-card p{color:var(--muted);font-size:14px;margin:0}.tag{display:inline-block;padding:3px 9px;border-radius:999px;background:#eef0ff;color:var(--primary);font-size:12px;margin:7px 0}
+.example{border-right:4px solid var(--accent);background:#fffaf0;padding:14px;border-radius:14px;margin:14px 0}.warning{border-right:4px solid var(--danger);background:#fff4f4;padding:14px;border-radius:14px}.tip{border-right:4px solid var(--success);background:#f0fff6;padding:14px;border-radius:14px}
+.quiz{border:1px solid var(--line);border-radius:18px;padding:18px;background:#fff;margin-top:14px}.quiz h4{margin:0 0 12px}.option{display:block;width:100%;text-align:right;background:#f7f8fc;border:1px solid var(--line);padding:10px 12px;border-radius:12px;margin:8px 0;transition:.2s}.option:hover{border-color:#aab0ff}.option.correct{background:#eafaf0;border-color:#5ac787}.option.wrong{background:#fff0f0;border-color:#e87c7c}.feedback{font-weight:800;margin-top:8px}
+input,textarea,select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--text);outline:none}textarea{min-height:110px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0 0 0 3px #3b3fd615}
+label{display:block;font-weight:800;margin:10px 0 5px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.progress-wrap{position:fixed;bottom:15px;right:15px;z-index:60;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:16px;padding:10px 14px;min-width:190px}.bar{height:8px;background:#edf0f6;border-radius:99px;overflow:hidden}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--secondary));transition:.4s}
+.prompt-box{background:#10162f;color:#eaf0ff;border-radius:18px;padding:18px;position:relative}.prompt-box code{white-space:pre-wrap;display:block;font-family:inherit}.copy{position:absolute;top:10px;left:10px}
+.demo-phone{max-width:310px;margin:auto;border:8px solid #141a33;border-radius:30px;padding:12px;background:#fff;box-shadow:var(--shadow)}.demo-screen{border-radius:20px;background:#f7f9ff;overflow:hidden}.demo-head{padding:12px;background:#3b3fd6;color:#fff}.demo-stack{padding:12px;display:grid;gap:10px}.demo-item{height:55px;border-radius:14px;background:#fff;border:1px solid var(--line);display:grid;place-items:center}.wire{display:grid;gap:8px}.wire div{height:55px;border:2px dashed #aeb5c8;border-radius:10px;display:grid;place-items:center;color:#64708a}.wire .big{height:110px}
+.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.swatch{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff}.swatch i{display:block;height:70px}.swatch b,.swatch small{display:block;padding:4px 10px}
+.code{direction:ltr;text-align:left;background:#11162a;color:#dce4ff;border-radius:16px;padding:16px;overflow:auto;font-family:ui-monospace,monospace;font-size:13px}.code .k{color:#b79cff}.code .s{color:#8ee3a7}.code .p{color:#ffd166}
+.checklist label{display:flex;align-items:center;gap:10px;font-weight:600}.checklist input{width:auto}
+.info-list{display:grid;gap:10px}.info-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#f4f6fb}.info-item span{color:var(--muted);text-align:left}.score{font-size:42px;font-weight:900;color:var(--primary)}.result-box{text-align:center}
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{padding:14px;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:center}.step b{display:block;color:var(--primary)}
+footer{background:#141a33;color:#eaf0ff;padding:35px 0;margin-top:35px}footer .muted{color:#b9c1da}
+.timer{font-size:52px;font-weight:900;text-align:center;letter-spacing:2px}.timer-controls{display:flex;gap:8px;justify-content:center}
+@media(max-width:850px){.hero-grid,.grid-3,.grid-4{grid-template-columns:1fr 1fr}.navlinks{display:none}.form-grid{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.hero{padding-top:40px}.hero-grid,.grid-2,.grid-3,.grid-4{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr 1fr}.stats .stat:last-child{grid-column:1/-1}.palette{grid-template-columns:1fr 1fr}.progress-wrap{left:12px;right:12px;bottom:10px}.section-head{align-items:start;flex-direction:column}}
+.fade{animation:fade .45s ease both}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.practical-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+/* Targeted readability fixes for the three practical labs */
+.responsive-lab .responsive-controls{background:#eef2ff;border:1px solid #cbd3ff;border-radius:14px;padding:12px}
+.responsive-lab .responsive-controls button{color:#17204a;background:#ffffff;border-color:#aeb9e8;font-weight:800}
+.responsive-lab .responsive-controls button:hover,.responsive-lab .responsive-controls button:focus-visible{background:#3b3fd6;color:#fff;border-color:#3b3fd6}
+.responsive-lab .responsive-stage{background:#e9edff;color:#17204a}
+.responsive-lab .responsive-stage>div{background:#fff;color:#17204a;border-color:#aeb9e8;font-weight:800}
+.animation-lab .hover-demo{color:#fff;background:#3b3fd6;font-weight:900;box-shadow:0 6px 16px rgba(59,63,214,.18)}
+.animation-lab .fade-demo,.animation-lab .lift-card{color:#17204a;background:#eef1ff;border:1px solid #b8c2ef;font-weight:800}
+.animation-lab .interaction-result{color:#17204a;background:#e9edff;border-right-color:#7b3ff2;font-weight:700}
+.javascript-lab .js-counter{background:#eef1ff;border:1px solid #b8c2ef;border-radius:16px;padding:14px;color:#17204a}
+.javascript-lab .js-counter b{min-width:48px;text-align:center;color:#3b3fd6;font-weight:950}
+.javascript-lab .example{background:#fff7df;color:#4a3700;border-right-color:#ffd166;font-weight:700}
+body.theme-dark .responsive-lab .responsive-controls{background:#182744;border-color:#3d5680}
+body.theme-dark .responsive-lab .responsive-controls button{background:#263858;color:#f4f7ff;border-color:#536b96}
+body.theme-dark .responsive-lab .responsive-controls button:hover,body.theme-dark .responsive-lab .responsive-controls button:focus-visible{background:#5965e8;color:#fff;border-color:#7d87ff}
+body.theme-dark .responsive-lab .responsive-stage{background:#1a2944;color:#f4f7ff;border-color:#6b7ea3}
+body.theme-dark .responsive-lab .responsive-stage>div{background:#263858;color:#f4f7ff;border-color:#536b96}
+body.theme-dark .animation-lab .fade-demo,body.theme-dark .animation-lab .lift-card{background:#263858;color:#f4f7ff;border-color:#536b96}
+body.theme-dark .animation-lab .interaction-result{background:#1d2d49;color:#f4f7ff;border-right-color:#a58bff}
+body.theme-dark .javascript-lab .js-counter{background:#1d2d49;color:#f4f7ff;border-color:#536b96}
+body.theme-dark .javascript-lab .js-counter b{color:#b9c0ff}
+body.theme-dark .javascript-lab .example{background:#3b311b;color:#fff0bd;border-right-color:#ffd166}
+
+.practical-card{min-height:280px}.mini-ui{padding:18px;border-radius:16px;background:#f4f5ff}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:10px}.compare>div{padding:12px;border-radius:14px;background:#f7f8fc}.compare code{display:block;margin-top:8px;direction:rtl}
+.site-structure{display:grid;gap:7px}.site-structure>div{padding:9px;text-align:center;border:1px solid #cfd4e4;border-radius:10px;background:#fafbff}.site-structure .hero-block{padding:18px;background:#eef0ff}
+.ux-demo{display:flex;gap:10px;align-items:center}.good-btn{padding:12px 18px;border:0;border-radius:12px;background:#3b3fd6;color:#fff;font-weight:800}.bad-btn{padding:5px 7px;border:1px solid #ddd;background:#fff;color:#999}
+.color-demo{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.color-demo button{border:0;border-radius:10px;padding:8px 13px}.color-stage{padding:18px;border-radius:15px;background:#3b3fd6;color:#fff;margin-bottom:10px;transition:.3s}
+.component-demo{display:flex;gap:12px;align-items:center;flex-wrap:wrap}.demo-cta{border:0;border-radius:12px;padding:12px 18px;background:#3b3fd6;color:#fff;font-weight:800}.demo-card,.lift-card{background:#fff;border:1px solid #e4e8f2;border-radius:16px;padding:20px;box-shadow:0 8px 20px #141a3312;transition:.3s}.demo-card:hover,.lift-card:hover{transform:translateY(-5px);box-shadow:0 15px 30px #141a3320}
+.wire-live{display:grid;gap:7px}.wire-live>div{border:2px dashed #aeb5c8;border-radius:10px;padding:10px;text-align:center}.wire-live .w-hero{height:80px;display:grid;place-items:center}.wire-live .w-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;border:0;padding:0}.wire-live .w-row i{border:2px dashed #aeb5c8;padding:18px;border-radius:10px;font-style:normal}.wire-live.mobile .w-row{grid-template-columns:1fr}
+.pipeline{display:flex;gap:7px;flex-wrap:wrap}.pipeline button,.responsive-controls button,.test-buttons button,.presentation-slides button{border:1px solid #dfe3ee;background:#fff;border-radius:10px;padding:9px 12px}
+.improve-box{padding:22px;border-radius:18px;background:#fff;border:1px solid #e4e8f2;margin-bottom:10px;transition:.3s}
+.improve-spacing{padding:40px}.improve-shadow{box-shadow:0 18px 35px #141a3330}.improve-color{background:#eef0ff}
+.responsive-controls{display:flex;gap:7px;flex-wrap:wrap}.responsive-stage{border:5px solid #141a33;border-radius:18px;margin-top:12px;padding:12px;display:grid;gap:8px;transition:.3s;margin-inline:auto;background:#f7f9ff}.responsive-stage>div{background:#fff;border:1px solid #dfe3ee;border-radius:10px;padding:15px;text-align:center}.responsive-stage.mobile-v{width:170px;grid-template-columns:1fr}.responsive-stage.tablet-v{width:100%;grid-template-columns:repeat(2,1fr)}.responsive-stage.desktop-v{width:100%;grid-template-columns:repeat(4,1fr)}
+.content-hero{padding:20px;border-radius:18px;background:linear-gradient(135deg,#242a56,#3b3fd6);color:#fff;margin-top:10px}.content-hero button{border:0;border-radius:10px;padding:10px 15px}.hover-demo{border:0;border-radius:12px;padding:13px 20px;background:#3b3fd6;color:#fff;transition:.3s}.hover-demo:hover{transform:scale(1.05);background:#7b3ff2}.fade-demo{opacity:0;animation:fade .5s ease forwards;animation-delay:.2s;background:#eef0ff;padding:13px;border-radius:12px;margin-top:10px}.bug-demo{display:flex;gap:10px;align-items:center}.bug-demo button{border:1px solid #e5484d;background:#fff;color:#e5484d;border-radius:10px;padding:9px 12px}.html-demo{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.html-demo button,.html-demo a{padding:8px 12px;border-radius:9px}.css-live-box{background:#eef0ff;border:1px solid #cdd3ff;border-radius:14px;padding:10px;margin-top:10px;transition:.2s}.js-counter{display:flex;align-items:center;justify-content:center;gap:15px;font-size:28px}.js-counter button{width:45px;height:45px;border:0;border-radius:50%;background:#3b3fd6;color:#fff}.project-check{display:grid;grid-template-columns:1fr 1fr;gap:7px}.project-check span{background:#f0fff6;padding:8px;border-radius:9px}.step-demo{margin-top:10px;padding:18px;background:#eef0ff;border-radius:15px;display:flex;justify-content:space-between}.deploy-demo{display:flex;align-items:center;justify-content:center;gap:15px}.deploy-demo>div{padding:15px;border-radius:15px;text-align:center}.local{background:#eef0ff}.online{background:#eafaf0}.arrow{font-size:25px}.rating-row{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:8px}.practical-check{display:grid;grid-template-columns:1fr 1fr}.critic-target{padding:15px;border-radius:15px;background:#fff7f7;border:1px solid #ffd0d0;margin-bottom:10px}.cycle{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center}.cycle span{padding:7px 10px;border-radius:999px;background:#eef0ff;color:#3b3fd6;font-weight:800}.ai-final{display:grid;gap:8px}.ai-final button{border:1px solid #dfe3ee;background:#fff;border-radius:12px;padding:10px;text-align:right}
+.global-modal{position:fixed;inset:0;background:#10162f99;backdrop-filter:blur(5px);display:grid;place-items:center;padding:20px;z-index:100}.global-modal.hidden{display:none}.modal-box{background:#fff;border-radius:22px;max-width:480px;padding:28px;position:relative;box-shadow:0 25px 70px #0004}.modal-x{position:absolute;top:10px;left:12px;border:0;background:#f1f2f7;border-radius:50%;width:35px;height:35px;font-size:24px}
+@media(max-width:700px){.practical-grid{grid-template-columns:1fr}.compare{grid-template-columns:1fr}.practical-card{min-height:auto}}
+
+
+/* Presentation themes */
+body.theme-dark{--bg:#0a1020;--card:#121a2e;--text:#eef2ff;--muted:#aab5ce;--line:#26324d;--soft:#18243a;--shadow:0 18px 48px rgba(0,0,0,.30)}
+.theme-switch{display:flex;gap:4px;align-items:center;border:1px solid var(--line);background:var(--card);padding:4px;border-radius:14px}.theme-switch button{border:0;background:transparent;color:var(--muted);padding:7px 9px;border-radius:10px;cursor:pointer;font-weight:800}.theme-switch button.active{background:var(--primary);color:#fff}
+body.theme-dark .topbar{background:rgba(10,16,32,.92)}
+body.theme-dark .hero{background:radial-gradient(circle at 15% 10%,rgba(99,102,241,.18),transparent 34%),radial-gradient(circle at 90% 20%,rgba(123,63,242,.12),transparent 30%)}
+body.theme-dark .card,body.theme-dark .stat,body.theme-dark .quiz,body.theme-dark input,body.theme-dark textarea,body.theme-dark select,body.theme-dark .btn.secondary{background:var(--card);color:var(--text);border-color:var(--line)}
+body.theme-dark .option{background:#17233b;color:var(--text)}
+body.theme-dark .progress-wrap{background:var(--card)}
+
+/* خوانایی آزمایش‌های زنده در تم تاریک */
+body.theme-dark .lab-instruction{background:#17243a;color:#f5f7ff;border-right-color:#5ac787}
+body.theme-dark .lab-instruction small,body.theme-dark .lab-action-label{color:#d7e0f2}
+body.theme-dark .mini-ui,body.theme-dark .site-structure>div,body.theme-dark .wire-live>div,body.theme-dark .responsive-stage,body.theme-dark .responsive-stage>div,body.theme-dark .demo-card,body.theme-dark .lift-card,body.theme-dark .css-live-box,body.theme-dark .step-demo,body.theme-dark .critic-target,body.theme-dark .ai-final button{background:#1a2740;color:#eef2ff;border-color:#344563}
+body.theme-dark .site-structure .hero-block{background:#26365a;color:#fff}
+body.theme-dark .wire-live .w-row i{border-color:#6d7d9b;color:#eef2ff}
+body.theme-dark .good-btn,body.theme-dark .demo-cta,body.theme-dark .hover-demo,body.theme-dark .js-counter button{color:#fff}
+body.theme-dark .bad-btn{background:#17233b;color:#aab5ce;border-color:#344563}
+body.theme-dark .fade-demo{background:#26365a;color:#fff}
+body.theme-dark .color-demo button,body.theme-dark .pipeline button,body.theme-dark .responsive-controls button,body.theme-dark .test-buttons button,body.theme-dark .presentation-slides button{background:#1a2740;color:#eef2ff;border:1px solid #344563}
+body.theme-dark .content-hero{color:#fff}
+body.theme-dark .deploy-demo .local{background:#26365a;color:#fff}
+body.theme-dark .deploy-demo .online{background:#173d2a;color:#dff8e8}
+body.theme-dark .cycle span{background:#26365a;color:#fff}
+body.theme-dark .html-demo button,body.theme-dark .html-demo a{background:#1a2740;color:#eef2ff;border:1px solid #344563}
+body.theme-dark .modal-box{background:#121a2e;color:#eef2ff;border:1px solid #344563}
+body.theme-dark .modal-x{background:#26334d;color:#fff}
+body.theme-dark .example{background:#302914;color:#fff1bf}
+body.theme-dark .warning{background:#351b1d;color:#ffd9da}
+body.theme-dark .tip{background:#132f25;color:#dcf8e9}
+body.theme-dark .prompt-box,body.theme-dark .code{color:#eaf0ff}
+
+.lab-instruction{font-size:15px;line-height:2;border:1px solid var(--line);box-shadow:var(--shadow);color:var(--text)}
+.lab-instruction strong{display:block;font-size:18px;margin-bottom:5px}
+.lab-instruction-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:10px 0}
+.lab-instruction-grid span{padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.55);border:1px solid rgba(120,130,170,.18)}
+.lab-action-label{display:inline-block;margin:8px 0;padding:6px 10px;border-radius:10px;background:#eef0ff;color:#2931a6;font-size:13px}
+@media(max-width:600px){.lab-instruction-grid{grid-template-columns:1fr}}
+
+@media(max-width:850px){.theme-switch{display:flex}.navlinks{display:none}}
+
+
+.exam-section{background:transparent}.exam-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:18px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow);margin-top:16px}.exam-progress{height:9px;background:#edf0f6;border-radius:99px;overflow:hidden;margin-top:10px;min-width:260px}.exam-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--secondary));transition:.3s}.exam-question{margin-top:16px;padding:24px;border:1px solid var(--line);border-radius:22px;background:var(--card);box-shadow:var(--shadow)}.exam-option{display:block;width:100%;text-align:right;border:1px solid var(--line);background:rgba(127,140,160,.06);color:var(--text);padding:14px;border-radius:14px;margin:10px 0;transition:.2s}.exam-option:hover{transform:translateY(-2px);border-color:var(--primary)}.exam-option.correct{background:rgba(18,161,80,.14);border-color:#39b86f}.exam-option.wrong{background:rgba(229,72,77,.12);border-color:#e87c7c}.exam-result{text-align:center;padding:30px;border-radius:22px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}.exam-score{font-size:64px;font-weight:950;color:var(--primary);line-height:1}.teacher-note{border-right:4px solid var(--primary)}
+
+
+/* Practical clarity layer: preserves the existing theme while making every interactive task obvious. */
+.action-guide{margin:10px 0 12px;padding:10px 12px;border:1px dashed var(--accent);border-radius:12px;background:var(--soft);color:var(--text);font-size:.92rem;line-height:1.8}
+.action-guide b{color:var(--accent)}
+.action-guide .guide-label{display:inline-block;margin-left:6px;padding:2px 8px;border-radius:999px;background:var(--accent);color:#fff;font-size:.76rem}
+.live-stage{margin-top:10px;padding:14px;border:2px solid var(--accent);border-radius:14px;background:var(--card);position:relative}
+.live-stage::before{content:"آزمایش زنده";position:absolute;top:-11px;right:12px;padding:2px 9px;border-radius:999px;background:var(--accent);color:#fff;font-size:.72rem;font-weight:800}
+.interaction-result{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--soft);border-right:4px solid var(--accent);min-height:22px}
+.demo-active{outline:3px solid color-mix(in srgb,var(--accent) 35%,transparent);outline-offset:2px}
+
+/* Final contrast + interaction safety layer: keeps the original design and fixes low-contrast surfaces. */
+.brand-logo{width:48px;height:42px;flex:0 0 auto;filter:drop-shadow(0 6px 14px rgba(59,63,214,.22))}
+.logo{color:var(--text)}
+.logo-badge{display:none}
+button,.btn,a,input,textarea,select{ -webkit-tap-highlight-color:transparent }
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid rgba(59,63,214,.35);outline-offset:2px}
+html{color-scheme:light}
+body.theme-dark{color-scheme:dark}
+body.theme-dark .tag,body.theme-dark .badge{background:#1a2740;color:#aeb8ff;border-color:#344563}
+body.theme-dark .navlinks a:hover,body.theme-dark .navlinks button:hover{background:#17243a;color:#cbd4ff}
+body.theme-dark .compare>div,body.theme-dark .mini-ui,body.theme-dark .demo-card,body.theme-dark .lift-card,body.theme-dark .improve-box,body.theme-dark .swatch,body.theme-dark .step,body.theme-dark .demo-phone,body.theme-dark .demo-item,body.theme-dark .responsive-stage>div,body.theme-dark .pipeline button,body.theme-dark .responsive-controls button,body.theme-dark .test-buttons button,body.theme-dark .presentation-slides button,body.theme-dark .ai-final button{background:#17243a;color:#eef2ff;border-color:#344563}
+body.theme-dark .site-structure>div{background:#17243a;color:#eef2ff;border-color:#344563}
+body.theme-dark .site-structure .hero-block{background:#26365a}
+body.theme-dark .wire div,body.theme-dark .wire-live>div,body.theme-dark .wire-live .w-row i{border-color:#5f6f8d;color:#eef2ff}
+body.theme-dark .bad-btn,body.theme-dark .bug-demo button{background:#17243a;color:#ffb6b8;border-color:#6a3e45}
+body.theme-dark .fade-demo,body.theme-dark .css-live-box,body.theme-dark .step-demo,body.theme-dark .improve-color{background:#26365a;color:#eef2ff;border-color:#405174}
+body.theme-dark .project-check span{background:#173d2a;color:#dff8e8}
+body.theme-dark .critic-target{background:#351b1d;color:#ffd9da;border-color:#6a3e45}
+body.theme-dark .cycle span{background:#26365a;color:#eef2ff}
+body.theme-dark .local{background:#26365a;color:#eef2ff}
+body.theme-dark .online{background:#173d2a;color:#dff8e8}
+body.theme-dark .lab-instruction-grid span{background:#1b2941;border-color:#344563;color:#eef2ff}
+body.theme-dark .action-guide{background:#18243a;color:#eef2ff;border-color:#5ac787}
+body.theme-dark .interaction-result{background:#18243a;color:#eef2ff}
+body.theme-dark .quiz .option{background:#17243b;color:#eef2ff}
+body.theme-dark .quiz .option.correct{background:#173d2a;color:#dff8e8}
+body.theme-dark .quiz .option.wrong{background:#351b1d;color:#ffd9da}
+body.theme-dark .progress-wrap{color:#eef2ff}
+body.theme-dark .info-item{background:#1a2740;color:#eef2ff;border-color:#344563}
+body.theme-dark .bar{background:#26324d}
+body.theme-dark .modal-box{background:#121a2e;color:#eef2ff}
+body.theme-dark .modal-x{background:#26334d;color:#fff}
+body.theme-dark .example{background:#302914;color:#fff1bf}
+body.theme-dark .warning{background:#351b1d;color:#ffd9da}
+body.theme-dark .tip{background:#132f25;color:#dcf8e9}
+body.theme-dark .brand-logo{filter:drop-shadow(0 7px 16px rgba(32,200,255,.25))}
+</style>
+
+<style id="final-three-labs-readability-fix">
+/* Final targeted fix: Responsive, Animation & Interaction, JavaScript */
+.responsive-lab .responsive-controls,
+.animation-lab,
+.javascript-lab {
+  color: var(--text) !important;
+}
+.responsive-lab .responsive-controls {
+  display:flex !important;
+  align-items:stretch !important;
+}
+.responsive-lab .responsive-controls .action-guide,
+.responsive-lab .responsive-controls .interaction-result {
+  flex: 0 0 100% !important;
+  width:100% !important;
+  box-sizing:border-box !important;
+}
+.responsive-lab .responsive-controls .action-guide {
+  display:block !important;
+  background:#eef2ff !important;
+  color:#17204a !important;
+  border:1px solid #aeb9e8 !important;
+}
+.responsive-lab .responsive-controls .action-guide b { color:#3b3fd6 !important; }
+.responsive-lab .responsive-controls .interaction-result {
+  background:#e9edff !important;
+  color:#17204a !important;
+  border-right:4px solid #7b3ff2 !important;
+}
+.responsive-lab .responsive-stage {
+  color:#17204a !important;
+}
+.responsive-lab .responsive-stage > div {
+  color:#17204a !important;
+  background:#fff !important;
+}
+.animation-lab .action-guide {
+  display:block !important;
+  width:100% !important;
+  background:#eef2ff !important;
+  color:#17204a !important;
+  border:1px solid #aeb9e8 !important;
+}
+.animation-lab .action-guide b { color:#3b3fd6 !important; }
+.animation-lab .hover-demo {
+  color:#fff !important;
+}
+.animation-lab .fade-demo,
+.animation-lab .lift-card {
+  color:#17204a !important;
+  background:#eef1ff !important;
+  border:1px solid #b8c2ef !important;
+}
+.animation-lab .interaction-result {
+  color:#17204a !important;
+  background:#e9edff !important;
+  border-right:4px solid #7b3ff2 !important;
+}
+.javascript-lab .js-counter {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  color:#17204a !important;
+  background:#eef2ff !important;
+  border:1px solid #b8c2ef !important;
+}
+.javascript-lab .js-counter .action-guide {
+  flex:0 0 100% !important;
+  width:100% !important;
+  order:-1 !important;
+  background:#eef2ff !important;
+  color:#17204a !important;
+  border:1px solid #aeb9e8 !important;
+  box-sizing:border-box !important;
+}
+.javascript-lab .js-counter .action-guide b { color:#3b3fd6 !important; }
+.javascript-lab .js-counter b { color:#3b3fd6 !important; }
+.javascript-lab .interaction-result {
+  color:#17204a !important;
+  background:#e9edff !important;
+  border-right:4px solid #7b3ff2 !important;
+}
+.javascript-lab .example {
+  color:#4a3700 !important;
+  background:#fff7df !important;
+  border-right:4px solid #ffd166 !important;
+}
+body.theme-dark .responsive-lab .responsive-controls .action-guide,
+body.theme-dark .animation-lab .action-guide,
+body.theme-dark .javascript-lab .js-counter .action-guide {
+  background:#1d2d49 !important;
+  color:#f4f7ff !important;
+  border-color:#5a7198 !important;
+}
+body.theme-dark .responsive-lab .responsive-controls .action-guide b,
+body.theme-dark .animation-lab .action-guide b,
+body.theme-dark .javascript-lab .js-counter .action-guide b { color:#bfc7ff !important; }
+body.theme-dark .responsive-lab .responsive-controls .interaction-result,
+body.theme-dark .animation-lab .interaction-result,
+body.theme-dark .javascript-lab .interaction-result {
+  background:#1d2d49 !important;
+  color:#f4f7ff !important;
+  border-right-color:#a58bff !important;
+}
+body.theme-dark .responsive-lab .responsive-stage {
+  background:#1a2944 !important;
+  color:#f4f7ff !important;
+}
+body.theme-dark .responsive-lab .responsive-stage > div {
+  background:#263858 !important;
+  color:#f4f7ff !important;
+  border-color:#536b96 !important;
+}
+body.theme-dark .animation-lab .fade-demo,
+body.theme-dark .animation-lab .lift-card {
+  background:#263858 !important;
+  color:#f4f7ff !important;
+  border-color:#536b96 !important;
+}
+body.theme-dark .javascript-lab .js-counter {
+  background:#1d2d49 !important;
+  color:#f4f7ff !important;
+  border-color:#536b96 !important;
+}
+body.theme-dark .javascript-lab .js-counter b { color:#b9c0ff !important; }
+body.theme-dark .javascript-lab .example {
+  background:#3b311b !important;
+  color:#fff0bd !important;
+  border-right-color:#ffd166 !important;
+}
+@media(max-width:600px){
+  .responsive-lab .responsive-controls .action-guide,
+  .responsive-lab .responsive-controls .interaction-result,
+  .javascript-lab .js-counter .action-guide { flex-basis:100% !important; }
+}
+</style>
+
+<style id="final-dark-labs-contrast-fix">
+/* Final high-contrast fix for the three requested laboratory cards in dark theme. */
+body.theme-dark .responsive-lab,
+body.theme-dark .animation-lab,
+body.theme-dark .javascript-lab{
+  color:#f7f9ff !important;
+}
+body.theme-dark .responsive-lab h3,
+body.theme-dark .animation-lab h3,
+body.theme-dark .javascript-lab h3,
+body.theme-dark .responsive-lab p,
+body.theme-dark .animation-lab p,
+body.theme-dark .javascript-lab p,
+body.theme-dark .responsive-lab .muted,
+body.theme-dark .animation-lab .muted,
+body.theme-dark .javascript-lab .muted{
+  color:#e5ebf7 !important;
+}
+body.theme-dark .responsive-lab .chapter-no,
+body.theme-dark .animation-lab .chapter-no,
+body.theme-dark .javascript-lab .chapter-no{
+  color:#aeb8ff !important;
+}
+body.theme-dark .responsive-lab .lab-action-label,
+body.theme-dark .animation-lab .lab-action-label,
+body.theme-dark .javascript-lab .lab-action-label{
+  background:#223555 !important;
+  color:#f8fbff !important;
+  border:1px solid #4d6b96 !important;
+}
+body.theme-dark .responsive-lab .lab-action-label b,
+body.theme-dark .animation-lab .lab-action-label b,
+body.theme-dark .javascript-lab .lab-action-label b{
+  color:#d9deff !important;
+}
+body.theme-dark .responsive-lab .action-guide,
+body.theme-dark .animation-lab .action-guide,
+body.theme-dark .javascript-lab .action-guide,
+body.theme-dark .javascript-lab .js-counter .action-guide{
+  background:#101d33 !important;
+  color:#f7f9ff !important;
+  border:1px solid #55739f !important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.025) !important;
+}
+body.theme-dark .responsive-lab .action-guide b,
+body.theme-dark .animation-lab .action-guide b,
+body.theme-dark .javascript-lab .action-guide b,
+body.theme-dark .javascript-lab .js-counter .action-guide b{
+  color:#dfe4ff !important;
+}
+body.theme-dark .responsive-lab .interaction-result,
+body.theme-dark .animation-lab .interaction-result,
+body.theme-dark .javascript-lab .interaction-result{
+  background:#162945 !important;
+  color:#f7f9ff !important;
+  border-right-color:#b7a5ff !important;
+}
+body.theme-dark .responsive-lab .responsive-controls button,
+body.theme-dark .animation-lab .hover-demo,
+body.theme-dark .javascript-lab .js-counter button,
+body.theme-dark .javascript-lab > .btn{
+  color:#ffffff !important;
+}
+body.theme-dark .responsive-lab .responsive-stage{
+  background:#13233d !important;
+  color:#ffffff !important;
+  border-color:#7186ab !important;
+}
+body.theme-dark .responsive-lab .responsive-stage > div{
+  background:#263b5d !important;
+  color:#ffffff !important;
+  border-color:#617aa4 !important;
+}
+body.theme-dark .animation-lab .fade-demo,
+body.theme-dark .animation-lab .lift-card{
+  background:#263b5d !important;
+  color:#ffffff !important;
+  border-color:#617aa4 !important;
+}
+body.theme-dark .javascript-lab .js-counter{
+  background:#13243e !important;
+  color:#ffffff !important;
+  border-color:#617aa4 !important;
+}
+body.theme-dark .javascript-lab .js-counter b#counterVal{
+  color:#ffffff !important;
+}
+body.theme-dark .javascript-lab .example{
+  background:#3d3217 !important;
+  color:#fff4c7 !important;
+  border-right-color:#ffd166 !important;
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+<div class="container nav">
+<a class="logo" href="#home" aria-label="آزمایشگاه فرانت‌اند با هوش مصنوعی">
+<svg class="brand-logo" viewBox="0 0 72 48" role="img" aria-label="لوگوی آزمایشگاه فرانت‌اند با هوش مصنوعی">
+<defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b3fd6"/><stop offset=".55" stop-color="#7b3ff2"/><stop offset="1" stop-color="#20c8ff"/></linearGradient></defs>
+<path d="M22 9 6 24l16 15" fill="none" stroke="url(#logoGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M50 9l16 15-16 15" fill="none" stroke="url(#logoGrad)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="m39 12-8 24" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+<circle cx="36" cy="24" r="5" fill="#fff" opacity=".95"/>
+<circle cx="36" cy="24" r="9" fill="none" stroke="#20c8ff" stroke-width="1.8" opacity=".7"/>
+</svg><span>آزمایشگاه فرانت‌اند با AI</span></a>
+<nav class="navlinks">
+<a href="#chapters">۳۱ فصل</a><a href="#practical-lab">آزمایشگاه عملی</a><a href="#lab">تمرین‌ها</a><a href="#final">پروژه نهایی</a><a href="#about">معرفی سایت</a><a href="#appendix">ضمائم</a>
+</nav>
+<div aria-label="انتخاب تم" class="theme-switch">
+<button id="themeLight" onclick="setTheme('light')" title="تم روشن">☀️</button>
+<button id="themeDark" onclick="setTheme('dark')" title="تم تاریک">🌙</button>
+</div>
+</div>
+</header>
+<main id="home">
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<span class="badge">نسخه تستی جامع • فارسی و RTL</span>
+<h1>یک سایت که واقعاً «همه‌چیز» را امتحان می‌کند.</h1>
+<p>این پروژه بر اساس چارچوب جزوه «طراحی فرانت‌اند با هوش مصنوعی» ساخته شده: ۳۱ فصل را به‌صورت عملی می‌بینی: Hover واقعاً Hover می‌کند، Modal واقعاً باز می‌شود، Responsive را با سه اندازه می‌بینی، JavaScript را اجرا می‌کنی، CSS را همان لحظه تغییر می‌دهی و برای هر مبحث یک نمونه تعاملی داری.</p>
+<div class="actions"><a class="btn primary" href="#exam">آزمون جامع را شروع کن</a><a class="btn secondary" href="#chapters">دیدن فصل‌ها</a></div>
+<div class="stats"><div class="stat"><b>۳۱</b>فصل</div><div class="stat"><b>۲۰</b>تمرین</div><div class="stat"><b>۶</b>ضمیمه کاربردی</div></div>
+</div>
+<div class="hero-card fade">
+<h3>چرخه اصلی پروژه</h3>
+<div class="terminal">
+<span class="green">01 idea</span><span>02 prompt</span><span class="yellow">03 design</span><span>04 build</span><span>05 inspect</span><span class="purple">06 improve</span><span>07 test → 08 deploy → 09 present</span>
+</div>
+<p style="color:#c6ccea">اصل مهم: AI دستیار است؛ تصمیم نهایی و بررسی نتیجه با طراح است.</p>
+</div>
+</div>
+</section>
+<section id="overview">
+<div class="container">
+<div class="section-head"><div><span class="tag">نقشه دوره</span><h2>پنج بخش اصلی</h2></div><span class="muted">از ایده تا سایت منتشرشده</span></div>
+<div class="grid grid-3">
+<div class="card"><b>۱. آشنایی</b><p class="muted">فرانت‌اند، ابزارها، نقش‌های AI و Prompt.</p></div>
+<div class="card"><b>۲. طراحی</b><p class="muted">ایده، ساختار، UI/UX، رنگ، فونت، اجزای مدرن و Wireframe.</p></div>
+<div class="card"><b>۳. ساخت با AI</b><p class="muted">ساخت، اصلاح، Responsive، محتوا، تصویر، انیمیشن و Debug.</p></div>
+<div class="card"><b>۴. کدنویسی</b><p class="muted">HTML، CSS، JavaScript و فهم کد تولیدشده.</p></div>
+<div class="card"><b>۵. پروژه نهایی</b><p class="muted">پروژه، ۱۶ گام، تست، انتشار، ارائه و ارزیابی.</p></div>
+<div class="card"><b>ضمائم</b><p class="muted">واژه‌نامه، FAQ، Cheat Sheet، منابع، تمرین‌ها و GitHub Pages.</p></div>
+</div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> هر جا دکمه، ورودی، انتخاب، آزمون یا نمایش نتیجه می‌بینی، آن را اجرا کن؛ این سایت برای یادگیری عملی ساخته شده.</div></div>
+</section>
+<section style="padding-top:12px"><div class="container"><div class="card" style="display:grid;grid-template-columns:1.5fr 1fr;gap:16px;align-items:center;background:linear-gradient(135deg,rgba(59,63,214,.08),rgba(123,63,242,.08))"><div><span class="tag">نسخه مناسب ارائه</span><h2 style="margin:4px 0 6px">یک آزمایشگاه واقعی، نه فقط یک جزوه آنلاین</h2><p class="muted" style="margin:0">مفاهیم HTML، CSS، JavaScript و کار با AI در خود سایت به‌صورت عملی قابل مشاهده و آزمایش هستند.</p></div><div class="grid grid-3"><div class="stat"><b>۳۱</b><small>مبحث</small></div><div class="stat"><b>۱۶</b><small>گام پروژه</small></div><div class="stat"><b>۱۵</b><small>سؤال آزمون</small></div></div></div></div></section>
+<section id="chapters">
+<div class="container">
+<div class="section-head"><div><span class="tag">۳۱ فصل</span><h2>کتابخانه فصل‌ها + تست هر فصل</h2></div><span class="muted">هر فصل حداقل یک تست مستقل دارد.</span></div>
+<div class="grid grid-3" id="chapterGrid"></div>
+</div>
+</section>
+<section id="practical-lab">
+<div class="container">
+<div class="section-head">
+<div><span class="tag">مهم‌ترین بخش</span><h2>آزمایشگاه عملی ۳۱ مبحث</h2></div>
+<span class="muted">هر مفهوم را ببین، لمس کن و نتیجه‌اش را همان‌جا مشاهده کن.</span>
+</div>
+<div class="tip lab-instruction" style="margin-bottom:18px">
+<strong>راهنمای آزمایشگاه — اینجا فقط متن را نخوان؛ آزمایش را انجام بده.</strong>
+<div class="lab-instruction-grid">
+<span>🖱️ <b>Hover:</b> موس را روی دکمه ببر.</span>
+<span>🪟 <b>Modal:</b> روی دکمه بزن تا پنجره واقعاً باز شود.</span>
+<span>📱 <b>Responsive:</b> حالت‌های موبایل، تبلت و کامپیوتر را بزن و تفاوت چیدمان را ببین.</span>
+<span>⚙️ <b>JavaScript:</b> کلیک، شمارنده و محاسبه را اجرا کن.</span>
+</div>
+<small>هر کارت آزمایش یک بخش قابل اجرا دارد؛ نتیجه را همان‌جا می‌بینی.</small>
+</div>
+<div class="practical-grid">
+<!-- 01 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۱ • فرانت‌اند</span><h3>فرانت‌اند را لمس کن</h3>
+<p class="muted">این‌ها چیزهایی هستند که کاربر مستقیماً در سایت می‌بیند و با آن‌ها تعامل می‌کند.</p>
+<div class="mini-ui"><h4>یک سایت کوچک</h4><p>این متن قابل مشاهده است.</p><div class="action-guide"><span class="guide-label">انجام بده</span> روی «کلیک کن» بزن و پیام نتیجه را ببین؛ این یعنی یک عنصر فرانت‌اند واقعاً قابل تعامل است.</div><button class="btn primary" onclick="demoToast('این یک عنصر تعاملی فرانت‌اند است.')">کلیک کن</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+</article>
+<!-- 02 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۲ • ابزارهای AI</span><h3>نقش ابزار را انتخاب کن</h3>
+<p class="muted">هر ابزار برای یک کار مناسب‌تر است.</p>
+<div class="action-guide"><span class="guide-label">انجام بده</span> ابزار را انتخاب کن و نتیجه را بخوان؛ تغییر انتخاب باید خروجی مناسب همان ابزار را نشان دهد.</div><select onchange="toolDemo(this.value)"><option value="">انتخاب ابزار...</option><option>گفت‌وگوی AI</option><option>طراحی UI</option><option>تصویرسازی AI</option><option>انتشار سایت</option></select><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="toolDemo">نتیجه اینجا نمایش داده می‌شود.</div>
+</article>
+<!-- 03 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۳ • نقش‌های AI</span><h3>AI را در نقش‌های مختلف ببین</h3>
+<div class="role-tabs">
+<div class="action-guide"><span class="guide-label">انجام بده</span> هر چهار نقش را جداگانه بزن و تفاوت کاری آن‌ها را در نتیجه مقایسه کن.</div><button class="btn secondary" onclick="roleDemo('ایده‌پرداز')">ایده‌پرداز</button>
+<button class="btn secondary" onclick="roleDemo('منتقد')">منتقد</button>
+<button class="btn secondary" onclick="roleDemo('برنامه‌نویس')">برنامه‌نویس</button>
+<button class="btn secondary" onclick="roleDemo('تعمیرکار')">تعمیرکار</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+</div>
+<div class="example" id="roleDemo">یک نقش را انتخاب کن.</div>
+</article>
+<!-- 04 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۴ • Prompt</span><h3>Prompt مبهم و دقیق</h3>
+<div class="compare"><div><b>بد:</b><code>یه سایت قشنگ بساز</code></div><div><b>خوب:</b><code>طراح UI/UX باش؛ برای نوجوانان یک سایت فارسی RTL بساز؛ Hero، کارت ویژگی، گالری و Footer داشته باشد؛ موبایل‌محور و خلوت باشد.</code></div></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> روی «مقایسه نتیجه» بزن تا تفاوت Prompt مبهم و دقیق را در خروجی ببینی.</div><button class="btn primary" onclick="promptCompare()">مقایسه نتیجه</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="promptCompare">هنوز مقایسه نشده.</div>
+</article>
+<!-- 05 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۵ • ایده</span><h3>ایده را از یک مشکل بساز</h3>
+<div class="action-guide"><span class="guide-label">انجام بده</span> یک مشکل واقعی در کادر بنویس و «تبدیل مشکل به ایده» را بزن؛ نتیجه باید از همان مشکل ساخته شود.</div><input id="ideaInput" placeholder="مثلاً دانش‌آموزها در ... مشکل دارند"/>
+<button class="btn primary" onclick="ideaDemo()">تبدیل مشکل به ایده</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="ideaDemo">یک مشکل واقعی وارد کن.</div>
+</article>
+<!-- 06 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۶ • ساختار سایت</span><h3>ساختار را قبل از کدنویسی ببین</h3>
+<div class="site-structure">
+<div>Navbar</div><div class="hero-block">Hero<br/><small>عنوان + توضیح + CTA</small></div>
+<div>About</div><div>Features</div><div>Gallery</div><div>Contact</div><div>Footer</div>
+</div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> به ساختار نگاه کن و «نمایش نسخه موبایل» را بزن تا ترتیب/چیدمان ساده‌تر را ببینی.</div><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></article>
+<!-- 07 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۷ • UI / UX</span><h3>UI یا UX؟ هر دو را تجربه کن</h3>
+<div class="ux-demo"><div class="action-guide"><span class="guide-label">انجام بده</span> هر دو دکمه را امتحان کن و بعد «تست تجربه کاربری» را بزن؛ راحتی استفاده را با ظاهر دکمه قاطی نکن.</div><button class="good-btn">دکمه واضح</button><button class="bad-btn">این؟</button></div>
+<p class="muted">UI = ظاهر دکمه. UX = اینکه کاربر بفهمد کدام دکمه را باید بزند و کار با آن راحت باشد.</p>
+<button class="btn secondary" onclick="uxDemo()">تست تجربه کاربری</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="uxResult">یک دکمه را امتحان کن.</div>
+</article>
+<!-- 08 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۸ • رنگ و تایپوگرافی</span><h3>اثر رنگ و فونت را ببین</h3>
+<div class="color-demo"><div class="action-guide"><span class="guide-label">انجام بده</span> رنگ‌های مختلف را بزن و تغییر نمونه را ببین؛ سپس فونت را تغییر بده و اثر آن را مقایسه کن.</div><button onclick="colorDemo('#3b3fd6')">آبی</button><button onclick="colorDemo('#12a150')">سبز</button><button onclick="colorDemo('#e5484d')">قرمز</button><button onclick="colorDemo('#ffd166')">زرد</button></div>
+<div class="color-stage" id="colorStage">رنگ و تایپوگرافی فقط زیبایی نیست؛ روی حس و خوانایی اثر می‌گذارد.</div>
+<select onchange="fontDemo(this.value)"><option value="Tahoma">فونت Tahoma</option><option value="Georgia">فونت Georgia</option><option value="monospace">فونت Monospace</option></select><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+</article>
+<!-- 09 -->
+<article class="card practical-card">
+<span class="chapter-no">۰۹ • اجزای سایت مدرن</span><h3>اجزای واقعی را باز کن</h3>
+<div class="component-demo"><div class="action-guide"><span class="guide-label">انجام بده</span> روی CTA بزن؛ باید Modal واقعی باز شود و با دکمه بستن بسته شود.</div><button class="demo-cta" onclick="openModal()">CTA / اطلاعات بیشتر</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div><div class="demo-card">Card با سایه و Hover</div></div>
+<p class="muted">Hero، Navbar، Card، CTA، Modal و Footer را در همین صفحه می‌بینی.</p>
+</article>
+<!-- 10 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۰ • Wireframe</span><h3>اول نقشه، بعد طراحی</h3>
+<div class="wire-live"><div class="w-nav">NAV</div><div class="w-hero">HERO</div><div class="w-row"><i>FEATURE</i><i>FEATURE</i><i>FEATURE</i></div><div class="w-footer">FOOTER</div></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> روی «نمایش نسخه موبایل» بزن و تغییر Wireframe را مشاهده کن.</div><button class="btn secondary" onclick="wireToggle()">نمایش نسخه موبایل</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+</article>
+<!-- 11 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۱ • ساخت سایت با AI</span><h3>فرآیند سه‌مرحله‌ای</h3>
+<div class="pipeline"><div class="action-guide"><span class="guide-label">انجام بده</span> هر سه مرحله را جداگانه بزن؛ مرحله انتخاب‌شده باید در فرآیند مشخص شود.</div><button onclick="pipeline(0)">۱ ساختار</button><button onclick="pipeline(1)">۲ طراحی</button><button onclick="pipeline(2)">۳ کدنویسی</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+<div class="example" id="pipelineOut">مرحله اول را انتخاب کن.</div>
+</article>
+<!-- 12 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۲ • اصلاح و بهبود</span><h3>تغییر کنترل‌شده</h3>
+<div class="improve-box" id="improveBox"><b>کارت نمونه</b><p>یک طراحی اولیه ساده.</p></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> هر گزینه را جداگانه بزن؛ فقط همان ویژگی باید تغییر کند تا مفهوم «بهبود کنترل‌شده» را ببینی.</div><button class="btn secondary" onclick="improve('spacing')">فقط فاصله‌ها</button>
+<button class="btn secondary" onclick="improve('shadow')">فقط سایه</button>
+<button class="btn secondary" onclick="improve('color')">فقط رنگ</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+</article>
+<!-- 13 -->
+<article class="card practical-card responsive-lab">
+<span class="chapter-no">۱۳ • Responsive</span><h3>واقعاً اندازه صفحه را تغییر بده</h3>
+<div class="lab-action-label">آزمایش زنده: <b>یکی از اندازه‌ها را انتخاب کن</b> و تفاوت چیدمان را ببین.</div><div class="responsive-controls"><div class="action-guide"><span class="guide-label">انجام بده</span> یکی از سه اندازه را بزن و چیدمان نمونه را مقایسه کن؛ این آزمایش شبیه‌سازی تغییر اندازه صفحه است.</div><button onclick="setViewport('mobile')">موبایل 390px</button><button onclick="setViewport('tablet')">تبلت 800px</button><button onclick="setViewport('desktop')">کامپیوتر 1280px</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+<div class="responsive-stage mobile-v" id="responsiveStage"><div>Hero</div><div>Card</div><div>Card</div><div>CTA</div></div>
+<p class="muted" id="responsiveText">موبایل: عناصر یک‌ستونه و دکمه مناسب لمس.</p>
+</article>
+<!-- 14 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۴ • محتوا و تصویر</span><h3>محتوا هم بخشی از طراحی است</h3>
+<div class="action-guide"><span class="guide-label">انجام بده</span> عنوان را تغییر بده و «نمایش در Hero» را بزن؛ نتیجه باید همان عنوان را در Hero نشان دهد.</div><input id="titleInput" value="شروع یک تجربه تازه"/>
+<button class="btn primary" onclick="contentDemo()">نمایش در Hero</button>
+<div class="content-hero"><h3 id="contentHeroTitle">عنوان Hero</h3><p>عنوان کوتاه، متن واضح، تصویر مناسب و CTA.</p><button>شروع کن</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+<p class="muted">در Prompt تصویر می‌توان «بدون نوشته» و سبک/رنگ/کاربرد را مشخص کرد.</p>
+</article>
+<!-- 15 -->
+<article class="card practical-card animation-lab">
+<span class="chapter-no">۱۵ • انیمیشن و تعامل</span><h3>Hover، Fade و حرکت کارت</h3>
+<div class="lab-action-label">آزمایش زنده: <b>موس را روی دکمه ببر</b></div><div class="action-guide"><span class="guide-label">انجام بده</span> موس را واقعاً روی دکمه ببر؛ سپس حرکت کارت و Fade را هم مشاهده کن. فقط خواندن متن کافی نیست.</div><button class="hover-demo">موس را روی من ببر ← Hover</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="fade-demo">Fade-in</div>
+<div class="lift-card">کارت؛ Hover کن</div>
+<p class="muted">حرکت کارت عمداً کم است؛ طبق جزوه حدود ۴ تا ۶ پیکسل.</p>
+</article>
+<!-- 16 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۶ • Debug</span><h3>خطای واقعی را پیدا کن</h3>
+<div class="bug-demo"><div class="action-guide"><span class="guide-label">انجام بده</span> ابتدا «دکمه خراب» را امتحان کن؛ سپس «رفع خطا با بررسی کد» را بزن و تفاوت قبل/بعد را ببین.</div><button id="brokenBtn">دکمه خراب</button><span id="bugStatus">فعلاً هیچ اتفاقی نمی‌افتد.</span></div>
+<button class="btn primary" onclick="fixBug()">رفع خطا با بررسی کد</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="fixOut">AI نباید حدس بزند؛ باید محل و رفتار خطا مشخص شود.</div>
+</article>
+<!-- 17 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۷ • HTML</span><h3>تگ‌ها واقعاً عنصر می‌سازند</h3>
+<div class="html-demo"><h3>این یک H3 است</h3><p>این یک P است.</p><a href="#practical-lab">این یک لینک است</a><div class="action-guide"><span class="guide-label">انجام بده</span> به عناصر HTML نگاه کن و روی Button بزن؛ باید رفتار قابل مشاهده عنصر را ببینی.</div><button type="button" onclick="htmlElementDemo(this)">این یک Button است</button><div class="interaction-result" id="htmlElementResult">روی Button بزن.</div></div>
+</article>
+<!-- 18 -->
+<article class="card practical-card">
+<span class="chapter-no">۱۸ • CSS</span><h3>CSS را همان لحظه تغییر بده</h3>
+<div class="action-guide"><span class="guide-label">انجام بده</span> نوار Padding را جابه‌جا کن؛ فاصله داخلی نمونه باید همان لحظه تغییر کند.</div><input max="30" min="0" oninput="cssLive(this.value)" type="range" value="10"/><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="css-live-box" id="cssLiveBox">Padding من تغییر می‌کند</div>
+<p class="muted">این همان ایده کنترل ظاهر با CSS است.</p>
+</article>
+<!-- 19 -->
+<article class="card practical-card javascript-lab">
+<span class="chapter-no">۱۹ • JavaScript</span><h3>JavaScript را اجرا کن</h3>
+<div class="lab-action-label">آزمایش زنده: <b>روی + و − کلیک کن</b>؛ عدد واقعاً با JavaScript تغییر می‌کند.</div><div class="js-counter"><div class="action-guide"><span class="guide-label">انجام بده</span> روی + و − چند بار بزن و بعد «جمع ۵ + ۳» را اجرا کن؛ عدد و محاسبه باید واقعاً تغییر کنند.</div><button onclick="counter(-1)">−</button><b id="counterVal">۵</b><button onclick="counter(1)">+</button></div>
+<button class="btn secondary" onclick="sumDemo()">جمع ۵ + ۳</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="sumOut">منتظر اجرا...</div>
+</article>
+<!-- 20 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۰ • فهم کد AI</span><h3>کد را بخوان، نه اینکه فقط حفظ کنی</h3>
+<div class="code"><span class="k">const</span> btn = document.querySelector(<span class="s">'#hello'</span>);<br/>btn.onclick = () =&gt; alert(<span class="s">'سلام!'</span>);</div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> روی «اجرای کد» بزن و نتیجه اجرای JavaScript را ببین؛ کد را با رفتار واقعی آن مقایسه کن.</div><button class="btn primary" id="hello" onclick="alert('سلام! این رفتار توسط JavaScript ساخته شده.')">اجرای کد</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<p class="muted">سؤال: عنصر را پیدا می‌کند؟ بله. رویداد کلیک می‌سازد؟ بله. نتیجه چیست؟ پیام.</p>
+</article>
+<!-- 21 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۱ • پروژه نهایی</span><h3>پروژه باید قابل استفاده باشد</h3>
+<div class="project-check"><span>✓ فارسی/RTL</span><span>✓ حداقل ۵ بخش</span><span>✓ تصویر/گالری</span><span>✓ تعامل</span><span>✓ موبایل</span></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> «بررسی سریع» را بزن و نتیجه معیارهای پروژه را مشاهده کن.</div><button class="btn primary" onclick="projectCheck()">بررسی سریع</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="projectOut">کلیک کن تا معیارها بررسی شوند.</div>
+</article>
+<!-- 22 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۲ • ۱۶ گام</span><h3>مسیر پروژه را مرحله‌به‌مرحله ببین</h3>
+<div class="action-guide"><span class="guide-label">انجام بده</span> نوار مرحله را جابه‌جا کن و متن گام پروژه را تغییر بده؛ مسیر ۱۶ گام را عملاً مرور کن.</div><input max="16" min="1" oninput="stepDemo(this.value)" type="range" value="1"/><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="step-demo" id="stepDemo"><b>گام ۱</b><span>انتخاب موضوع</span></div>
+</article>
+<!-- 23 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۳ • تست</span><h3>تست واقعی دکمه‌ها</h3>
+<div class="test-buttons"><div class="action-guide"><span class="guide-label">انجام بده</span> هر سه دکمه را بزن؛ هر دکمه باید نتیجه تست خودش را ثبت کند.</div><button onclick="testOne(0)">دکمه ۱</button><button onclick="testOne(1)">دکمه ۲</button><button onclick="testOne(2)">دکمه ۳</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+<div class="example" id="testReport">سه دکمه را امتحان کن.</div>
+</article>
+<!-- 24 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۴ • انتشار</span><h3>انتشار یعنی چه؟</h3>
+<div class="deploy-demo"><div class="local">index.html<br/><small>روی دستگاه تو</small></div><div class="arrow">→</div><div class="online">🌐 سایت عمومی<br/><small>قابل باز شدن با لینک</small></div></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> روی «شبیه‌سازی Deploy» بزن تا مسیر محلی تا سایت عمومی را در نتیجه ببینی.</div><button class="btn primary" onclick="deployDemo()">شبیه‌سازی Deploy</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="deployOut">فعلاً منتشر نشده.</div>
+</article>
+<!-- 25 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۵ • ارائه</span><h3>ارائه دو دقیقه‌ای</h3>
+<div class="presentation-slides"><div class="action-guide"><span class="guide-label">انجام بده</span> هر بخش ارائه را بزن و متن مربوط به همان بخش را مشاهده کن.</div><button onclick="present(0)">معرفی</button><button onclick="present(1)">هدف</button><button onclick="present(2)">چالش</button><button onclick="present(3)">نقش AI</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+<div class="example" id="presentOut">یک بخش ارائه را انتخاب کن.</div>
+</article>
+<!-- 26 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۶ • ارزیابی</span><h3>داور سایت باش</h3>
+<div class="rating-row"><span>UI</span><div class="action-guide"><span class="guide-label">انجام بده</span> سه امتیاز را تغییر بده و «محاسبه میانگین» را بزن؛ امتیاز باید از ورودی‌های خودت محاسبه شود.</div><input max="10" min="0" type="range" value="7"/></div>
+<div class="rating-row"><span>UX</span><input max="10" min="0" type="range" value="8"/></div>
+<div class="rating-row"><span>Responsive</span><input max="10" min="0" type="range" value="6"/></div>
+<button class="btn primary" onclick="judgeDemo()">محاسبه میانگین</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="judgeOut">هنوز امتیاز محاسبه نشده.</div>
+</article>
+<!-- 27 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۷ • Promptهای آماده</span><h3>Prompt را با موضوع عوض کن</h3>
+<div class="action-guide"><span class="guide-label">انجام بده</span> موضوع را تغییر بده و Prompt آماده همان موضوع را بررسی کن.</div><select id="promptType" onchange="readyPrompt()"><option>سایت ورزشی</option><option>سایت آموزشی</option><option>سایت نجوم</option><option>سایت معرفی بازی</option></select><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="prompt-box" id="readyPrompt" style="margin-top:10px"><code>موضوع را انتخاب کن.</code></div>
+</article>
+<!-- 28 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۸ • چک‌لیست</span><h3>خودت را بررسی کن</h3>
+<div class="checklist practical-check"><label><div class="action-guide"><span class="guide-label">انجام بده</span> چند گزینه را تیک بزن و «درصد آمادگی» را بزن؛ درصد باید بر اساس موارد انتخاب‌شده تغییر کند.</div><input type="checkbox"/> ایده مشخص</label><label><input type="checkbox"/> UI هماهنگ</label><label><input type="checkbox"/> UX قابل فهم</label><label><input type="checkbox"/> Responsive</label><label><input type="checkbox"/> Debug</label></div>
+<button class="btn secondary" onclick="checkPractical()">درصد آمادگی</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="practicalCheckOut">۰٪</div>
+</article>
+<!-- 29 -->
+<article class="card practical-card">
+<span class="chapter-no">۲۹ • تمرین کلاسی</span><h3>منتقد طراحی باش</h3>
+<div class="critic-target"><h4>سایت نمونه</h4><p>رنگ زیاد، دکمه کوچک، متن طولانی</p><div class="action-guide"><span class="guide-label">انجام بده</span> روی «ادامه» و سپس «ثبت نقد» کار کن؛ نقد را ثبت و نتیجه را مشاهده کن.</div><button>ادامه</button></div>
+<textarea id="criticInput" placeholder="۳ نکته مثبت/منفی یا یک پیشنهاد بنویس..."></textarea>
+<button class="btn primary" onclick="criticDemo()">ثبت نقد</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="criticOut">نقدت را ثبت کن.</div>
+</article>
+<!-- 30 -->
+<article class="card practical-card">
+<span class="chapter-no">۳۰ • مسیر یادگیری</span><h3>چرخه را خودت جلو ببر</h3>
+<div class="cycle"><span>ایده</span><i>→</i><span>Prompt</span><i>→</i><span>طراحی</span><i>→</i><span>ساخت</span><i>→</i><span>بررسی</span><i>→</i><span>اصلاح</span></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> «اجرای چرخه» را چند بار بزن و ببین چرخه از ایده تا اصلاح مرحله‌به‌مرحله جلو می‌رود.</div><button class="btn primary" onclick="cycleNext()">اجرای چرخه</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div>
+<div class="example" id="cycleOut">از ایده شروع کن.</div>
+</article>
+<!-- 31 -->
+<article class="card practical-card">
+<span class="chapter-no">۳۱ • جمع‌بندی</span><h3>AI دستیار است، نه جایگزین فکر کردن</h3>
+<div class="ai-final"><div class="action-guide"><span class="guide-label">انجام بده</span> دو گزینه را مقایسه کن و گزینه «بررسی و اصلاح» را انتخاب کن تا اصل کنترل خروجی AI را در عمل ببینی.</div><button onclick="aiFinal(true)">خروجی AI را بدون بررسی قبول کنم؟</button><button onclick="aiFinal(false)">خروجی AI را بررسی و اصلاح کنم؟</button><div class="interaction-result">نتیجه این آزمایش اینجا نمایش داده می‌شود.</div></div>
+<div class="example" id="aiFinalOut">یک گزینه را انتخاب کن.</div>
+</article>
+</div>
+</div>
+</section>
+<div aria-modal="true" class="global-modal hidden" id="globalModal" role="dialog">
+<div class="modal-box">
+<button class="modal-x" onclick="closeModal()">×</button>
+<h3>پنجره Modal واقعی</h3>
+<p>این همان نمونه‌ای است که در مبحث JavaScript و اجزای مدرن سایت یاد می‌گیری: با کلیک باز شد و با تغییر کلاس بسته می‌شود.</p>
+<button class="btn primary" onclick="closeModal()">بستن</button>
+</div>
+</div>
+<section id="lab">
+<div class="container">
+<div class="section-head"><div><span class="tag">آزمایشگاه</span><h2>تمرین‌های واقعی جزوه</h2></div><span class="muted">پاسخ‌ها را ذخیره کن و نتیجه را ببین.</span></div>
+<div class="grid grid-2">
+<div class="card">
+<h3>۱) سازنده Prompt شش‌بخشی</h3>
+<p class="muted">فرمول: نقش + هدف + مخاطب + جزئیات + محدودیت + خروجی</p>
+<div class="form-grid">
+<div><label>نقش</label><div class="action-guide"><span class="guide-label">انجام بده</span> ۶ ورودی را تکمیل/ویرایش کن و «ساخت Prompt» را بزن؛ Prompt ساخته‌شده باید در کادر نتیجه ظاهر شود و قابل کپی باشد.</div><input id="prRole" value="طراح حرفه‌ای UI/UX"/></div>
+<div><label>هدف</label><input id="prGoal" value="یک سایت معرفی بازی طراحی کن"/></div>
+<div><label>مخاطب</label><input id="prAudience" value="نوجوانان ۱۲ تا ۱۵ سال"/></div>
+<div><label>جزئیات</label><input id="prDetails" value="Hero، ویژگی‌ها، گالری و Footer"/></div>
+<div><label>محدودیت</label><input id="prLimits" value="فارسی، RTL، شلوغ نباشد، حداکثر ۴ رنگ"/></div>
+<div><label>خروجی</label><input id="prOutput" value="ابتدا ساختار را توضیح بده، سپس کد کامل"/></div>
+</div>
+<button class="btn primary" onclick="buildPrompt()">ساخت Prompt</button>
+<div class="prompt-box" id="promptOut" style="margin-top:14px;display:none"><button class="btn secondary copy" onclick="copyPrompt()">کپی</button><code id="promptText"></code></div>
+</div>
+<div class="card">
+<h3>۲) گزارش خطای حرفه‌ای</h3>
+<p class="muted">فرمول: کجا + چه کردم + چه می‌خواستم + چه شد</p>
+<label>کجا؟</label><div class="action-guide"><span class="guide-label">انجام بده</span> چهار کادر را پر کن و «ساخت گزارش Debug» را بزن؛ گزارش نهایی باید از اطلاعات خودت ساخته شود.</div><input id="bugWhere" value="در نسخه موبایل"/>
+<label>چه کردم؟</label><input id="bugDid" value="روی منوی همبرگری زدم"/>
+<label>چه می‌خواستم؟</label><input id="bugWant" value="منو باز شود"/>
+<label>چه شد؟</label><input id="bugGot" value="هیچ اتفاقی نیفتاد"/>
+<button class="btn primary" onclick="buildBug()">ساخت گزارش Debug</button>
+<div class="example" id="bugOut" style="display:none"></div>
+</div>
+<div class="card">
+<h3>۳) انتخاب رنگ</h3>
+<p class="muted">چهار پالت نمونه برای مقایسه؛ رنگ را با کاربردش انتخاب کن.</p>
+<div class="palette">
+<div class="swatch"><i style="background:#3b3fd6"></i><b>آبی کهکشانی</b><small>#3B3FD6</small></div>
+<div class="swatch"><i style="background:#ffd166"></i><b>زرد طلایی</b><small>#FFD166</small></div>
+<div class="swatch"><i style="background:#12a150"></i><b>سبز چمن</b><small>#12A150</small></div>
+<div class="swatch"><i style="background:#e5359b"></i><b>صورتی انرژی</b><small>#E5359B</small></div>
+</div>
+<div class="quiz"><h4>برای یک سایت فناوری/مدرسه‌ای، کدام حس با «آبی» در چارچوب جزوه هماهنگ‌تر است؟</h4><div class="action-guide"><span class="guide-label">انجام بده</span> یکی از پاسخ‌ها را انتخاب کن؛ پاسخ انتخاب‌شده باید همان‌جا بازخورد درست/نادرست بگیرد.</div><button class="option" onclick="q(this,true,'درست؛ اعتماد، امنیت و فناوری.')">اعتماد و فناوری</button><button class="option" onclick="q(this,false,'نه؛ این توصیف در جزوه برای قرمز آمده است.')">هیجان و هشدار</button><button class="option" onclick="q(this,false,'نه؛ این توصیف برای سبز آمده است.')">طبیعت و رشد</button><div class="feedback"></div></div>
+</div>
+<div class="card">
+<h3>۴) وایرفریم</h3>
+<p class="muted">وایرفریم یعنی نقشه ساده قبل از رنگ و کدنویسی.</p>
+<div class="wire"><div>Navbar + Logo</div><div class="big">Hero: عنوان + توضیح + CTA</div><div>Features: کارت ۱ | کارت ۲ | کارت ۳</div><div>Gallery: تصویر | تصویر | تصویر</div><div>Footer</div></div>
+<div class="quiz"><h4>در موبایل، چیدمان پیشنهادی بیشتر چگونه می‌شود؟</h4><div class="action-guide"><span class="guide-label">انجام بده</span> یکی از گزینه‌ها را انتخاب کن و بعد گزینه موبایل را بررسی کن؛ اینجا مفهوم Wireframe را با یک تصمیم واقعی تمرین می‌کنی.</div><button class="option" onclick="q(this,true,'درست؛ یک ستون پشت سر هم برای صفحه باریک مناسب‌تر است.')">یک ستون</button><button class="option" onclick="q(this,false,'برای موبایل انتخاب اصلی جزوه نیست.')">چهار ستون</button><div class="feedback"></div></div>
+</div>
+<div class="card">
+<h3>۵) Responsive Checker</h3>
+<div class="demo-phone"><div class="demo-screen"><div class="demo-head">Logo ☰</div><div class="demo-stack"><div class="demo-item">Hero</div><div class="demo-item">Card 1</div><div class="demo-item">Card 2</div><div class="demo-item">CTA</div></div></div></div>
+<div class="quiz"><h4>کدام مورد یکی از مشکلات رایج موبایل است؟</h4><div class="action-guide"><span class="guide-label">انجام بده</span> پاسخ را انتخاب کن و بازخورد را بخوان؛ هدف این است که علت مشکل Responsive را تشخیص بدهی، نه فقط تعریف را حفظ کنی.</div><button class="option" onclick="q(this,false,'نه؛ این حالت مطلوب است.')">تصاویر داخل کادر بمانند</button><button class="option" onclick="q(this,true,'درست؛ عنصر پهن‌تر از صفحه می‌تواند اسکرول افقی بسازد.')">عنصری پهن‌تر از صفحه و ایجاد اسکرول افقی</button><div class="feedback"></div></div>
+</div>
+<div class="card">
+<h3>۶) کدخوانی سریع</h3>
+<div class="code"><span class="k">&lt;button</span> id=<span class="s">"start"</span><span class="k">&gt;</span>شروع<span class="k">&lt;/button&gt;</span>
+<br/><br/><span class="k">&lt;style&gt;</span>
+<br/><span class="p">#start</span>{color:<span class="s">white</span>;background:<span class="s">#3b3fd6</span>;}
+<br/><span class="k">&lt;/style&gt;</span>
+<br/><br/><span class="k">&lt;script&gt;</span>
+<br/>document.getElementById(<span class="s">"start"</span>).onclick=()=&gt;alert(<span class="s">"شروع شد!"</span>);
+<br/><span class="k">&lt;/script&gt;</span></div>
+<div class="quiz"><h4>کدام بخش رفتار کلیک دکمه را می‌سازد؟</h4><div class="action-guide"><span class="guide-label">انجام بده</span> کد را بخوان، سپس پاسخ را انتخاب کن تا مشخص شود کدام فناوری رفتار کلیک را می‌سازد.</div><button class="option" onclick="q(this,false,'HTML ساختار را می‌سازد.')">HTML</button><button class="option" onclick="q(this,false,'CSS ظاهر را کنترل می‌کند.')">CSS</button><button class="option" onclick="q(this,true,'درست؛ JavaScript رفتار و تعامل را کنترل می‌کند.')">JavaScript</button><div class="feedback"></div></div>
+</div>
+</div>
+</div>
+</section>
+<section id="code">
+<div class="container">
+<div class="section-head"><div><span class="tag">کدنویسی</span><h2>سه فناوری اصلی در یک مثال</h2></div></div>
+<div class="grid grid-3">
+<div class="card"><h3>HTML = اسکلت</h3><p>عنوان، پاراگراف، دکمه، تصویر، لینک، لیست، div و section.</p><div class="code">&lt;h1&gt;سلام&lt;/h1&gt;<br/>&lt;p&gt;سایت من است&lt;/p&gt;<br/>&lt;button&gt;شروع&lt;/button&gt;</div><div class="live-stage"><div class="mini-ui"><h4>سلام</h4><p>این عنصر HTML واقعی است.</p><div class="action-guide"><span class="guide-label">انجام بده</span> روی دکمه نمونه بزن؛ این بار تگ‌های HTML فقط کد نیستند و واقعاً عنصر صفحه را می‌سازند.</div><button class="btn primary" onclick="this.nextElementSibling.textContent='HTML با موفقیت در صفحه نمایش داده شد.'" type="button">شروع</button><div class="interaction-result">روی «شروع» بزن.</div></div></div></div>
+<div class="card"><h3>CSS = ظاهر</h3><p>رنگ، فونت، فاصله، گردی، سایه، Flex و Responsive.</p><div class="code">.card{<br/> color:#12a150;<br/> border-radius:15px;<br/> padding:20px;<br/>}</div><div class="live-stage"><div class="mini-ui" id="cssCodeLiveBox">نمونه CSS</div><div class="action-guide"><span class="guide-label">انجام بده</span> نوار را جابه‌جا کن؛ ظاهر نمونه باید همان لحظه با CSS تغییر کند.</div><input aria-label="Padding نمونه CSS" max="40" min="0" oninput="document.getElementById('cssCodeLiveBox').style.padding=this.value+'px'; document.getElementById('cssLiveResult').textContent='Padding: '+this.value+'px'" type="range" value="20"/><div class="interaction-result" id="cssLiveResult">Padding: 20px</div></div></div>
+<div class="card"><h3>JavaScript = رفتار</h3><p>کلیک، پیام، Modal، منو و تعامل‌ها.</p><div class="code">const btn=document.querySelector('#start');<br/>btn.onclick=()=&gt;alert('سلام!');</div><div class="live-stage"><div class="action-guide"><span class="guide-label">انجام بده</span> روی دکمه بزن؛ نتیجه اجرای JavaScript را همین‌جا ببین.</div><button class="btn primary" onclick="document.getElementById('jsLiveResult').textContent='JavaScript اجرا شد: '+new Date().toLocaleTimeString('fa-IR')" type="button">اجرای JavaScript</button><div class="interaction-result" id="jsLiveResult">هنوز اجرا نشده.</div></div></div>
+</div>
+<div class="card" style="margin-top:16px">
+<h3>تست مفهوم Padding و Margin</h3>
+<div class="quiz"><h4>فاصله داخل عنصر کدام است؟</h4><button class="option" onclick="q(this,true,'درست؛ padding فاصله بین محتوا و لبه عنصر است.')">Padding</button><button class="option" onclick="q(this,false,'Margin فاصله بیرون عنصر با اطراف آن است.')">Margin</button><div class="feedback"></div></div>
+</div>
+</div>
+</section>
+<section class="exam-section" id="exam" style="display:block"><div class="container"><div class="section-head"><div><span class="tag">سنجش نهایی</span><h2>آزمون جامع ۳۱ مبحث</h2></div><span class="muted">۱۵ سؤال تصادفی • جای گزینه‌ها هم تصادفی</span></div><div class="teacher-note card"><b>قانون آزمون:</b> پاسخ درست جای ثابتی ندارد و در هر بار شروع آزمون، سؤال‌ها و ترتیب گزینه‌ها دوباره تصادفی می‌شوند.</div><div class="card" id="examStart" style="margin-top:16px;text-align:center"><h3>آماده‌ای دانسته‌هایت را امتحان کنی؟</h3><p class="muted">۱۵ سؤال از بین ۳۱ مبحث انتخاب می‌شود و در پایان نتیجه کلی نمایش داده می‌شود.</p><button class="btn primary" onclick="startExam()">شروع آزمون</button></div><div id="examArea" style="display:none"><div class="exam-top"><div><b id="examCounter">سؤال ۱ از ۱۵</b><div class="exam-progress"><i id="examBar"></i></div></div><b id="examScoreLive">۰ درست</b></div><div id="examQuestion"></div><div class="actions" style="justify-content:space-between"><button class="btn secondary" disabled="" id="examNext" onclick="nextExamQuestion()">سؤال بعدی</button><button class="btn secondary" onclick="restartExam()">شروع دوباره</button></div></div><div id="examResult" style="display:none;margin-top:16px"></div></div></section>
+<section id="final">
+<div class="container">
+<div class="section-head"><div><span class="tag">پروژه نهایی</span><h2>شبیه‌ساز تحویل پروژه</h2></div><span class="muted">۱۶ گام + چک‌لیست + امتیاز</span></div>
+<div class="grid grid-2">
+<div class="card">
+<h3>۱۶ گام پروژه</h3>
+<div class="checklist" id="steps"></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> هر گام را که انجام دادی علامت بزن و «ذخیره پیشرفت» را بزن؛ پیشرفتت ذخیره می‌شود.</div><button class="btn primary" onclick="saveSteps()">ذخیره پیشرفت</button>
+</div>
+<div class="card">
+<h3>ارزیابی ۱۰۰ امتیازی</h3>
+<div class="form-grid" id="rubric"></div>
+<div style="margin-top:15px;text-align:center"><div class="score" id="rubricScore">۰ / ۱۰۰</div><div class="muted">ایده ۱۵ • طراحی ۲۰ • AI ۲۰ • توضیح ۱۵ • Responsive ۱۰ • خلاقیت ۱۰ • ارائه ۱۰</div></div>
+<div class="action-guide"><span class="guide-label">انجام بده</span> امتیاز هر معیار را تغییر بده و مجموع را ببین؛ ارزیابی باید از ورودی‌های خودت محاسبه شود.</div></div>
+</div>
+<div class="card" style="margin-top:16px">
+<h3>بررسی نهایی</h3>
+<div class="checklist" id="finalChecks"></div>
+<div class="actions"><div class="action-guide"><span class="guide-label">انجام بده</span> موارد نهایی را بررسی کن، «محاسبه آمادگی» را بزن و نتیجه را ببین. چاپ/PDF فقط برای خروجی گرفتن است.</div><button class="btn primary" onclick="finalCheck()">محاسبه آمادگی</button><button class="btn secondary" onclick="window.print()">چاپ / PDF</button></div>
+<div class="result-box" id="finalResult" style="margin-top:15px"></div>
+</div>
+</div>
+</section>
+<section id="presentation">
+<div class="container">
+<div class="section-head"><div><span class="tag">ارائه</span><h2>تمرین ارائه دو دقیقه‌ای</h2></div></div>
+<div class="grid grid-2">
+<div class="card">
+<div class="timer" id="timer">02:00</div>
+<div class="timer-controls"><div class="action-guide"><span class="guide-label">انجام بده</span> روی «شروع» بزن تا شمارش ۲ دقیقه‌ای واقعاً اجرا شود؛ برای توقف/شروع مجدد از «بازنشانی» استفاده کن.</div><button class="btn primary" onclick="timerStart()">شروع</button><button class="btn secondary" onclick="timerReset()">بازنشانی</button></div>
+<p class="muted">ساختار پیشنهادی: معرفی → هدف و مخاطب → نمایش سایت → یک چالش و نقش AI → نکته‌ای که یاد گرفتی.</p>
+</div>
+<div class="card">
+<label>متن کوتاه ارائه من</label>
+<div class="action-guide"><span class="guide-label">انجام بده</span> متن ارائه خودت را بنویس؛ هدف این بخش تمرین ارائه واقعی است، نه فقط خواندن ساختار.</div><textarea placeholder="سلام. من در این پروژه یک سایت درباره ... طراحی کردم..."></textarea>
+<div class="tip">یادت باشد بتوانی توضیح بدهی چه ساختی، چرا این انتخاب‌ها را کردی و کجا از AI کمک گرفتی.</div>
+</div>
+</div>
+</div>
+</section>
+<section id="about">
+<div class="container">
+<div class="section-head"><div><span class="tag">معرفی سایت</span><h2>آزمایشگاه عملی فرانت‌اند با هوش مصنوعی</h2></div><span class="muted">از یادگیری مفاهیم تا ساخت و ارائه پروژه</span></div>
+<div class="grid grid-2">
+<div class="card">
+<h3>این سایت چیست؟</h3>
+<p>این وب‌سایت یک محیط آموزشی و عملی برای یادگیری طراحی و ساخت فرانت‌اند با کمک هوش مصنوعی است. هدف آن این است که مفاهیم فقط به‌صورت تعریف و متن ارائه نشوند؛ بلکه کاربر بتواند بسیاری از آن‌ها را داخل خود سایت اجرا، مشاهده، مقایسه و آزمایش کند.</p>
+<p>محتوا بر پایه چارچوب جزوه «طراحی فرانت‌اند با هوش مصنوعی» سازمان‌دهی شده و مباحثی مانند ایده‌پردازی، Prompt، ساختار سایت، UI/UX، رنگ و تایپوگرافی، اجزای مدرن، Wireframe، ساخت با AI، Responsive، محتوا و تصویر، انیمیشن و تعامل، Debug، HTML، CSS، JavaScript، تست، انتشار و ارائه پروژه را پوشش می‌دهد.</p>
+<p>در بخش آزمایشگاه عملی، ۳۱ مبحث با نمونه‌های تعاملی همراه شده‌اند؛ از جمله Hover، Modal، Responsive، تغییر زنده CSS، اجرای JavaScript، بررسی خطا، Prompt Builder، ارزیابی پروژه و شبیه‌سازی انتشار.</p>
+</div>
+<div class="card">
+<h3>اطلاعات پروژه</h3>
+<div class="info-list">
+<div class="info-item"><b>سازنده :</b><span>M_H_2000o</span></div>
+<div class="info-item"><b>مدرس :</b><span>محمد خاشعی</span></div>
+<div class="info-item"><b>نوع پروژه :</b><span>آزمایشگاه آموزشی و تعاملی فرانت‌اند</span></div>
+<div class="info-item"><b>مخاطب :</b><span>دانش‌آموزان و علاقه‌مندان یادگیری فرانت‌اند با AI</span></div>
+<div class="info-item"><b>ساختار :</b><span>۳۱ مبحث، آزمایش‌های عملی، تمرین، آزمون، پروژه نهایی و ارائه</span></div>
+</div>
+<div class="tip" style="margin-top:14px"><b>ایده اصلی:</b> هوش مصنوعی در این مسیر نقش دستیار دارد؛ یادگیری واقعی با فهم، بررسی، آزمایش، اصلاح و ساختن اتفاق می‌افتد.</div>
+</div>
+</div>
+</div>
+</section>
+<section id="appendix">
+<div class="container">
+<div class="section-head"><div><span class="tag">ضمائم</span><h2>جعبه‌ابزار سریع</h2></div></div>
+<div class="grid grid-3">
+<div class="card"><h3>واژه‌نامه</h3><p><b>UI:</b> ظاهر رابط • <b>UX:</b> تجربه و راحتی • <b>Wireframe:</b> نقشه ساده • <b>Responsive:</b> سازگار با اندازه‌ها • <b>Deploy:</b> انتشار • <b>Debug:</b> رفع خطا • <b>CTA:</b> فراخوان عمل • <b>Modal:</b> پنجره بازشونده.</p><div class="action-guide"><span class="guide-label">انجام بده</span> یک واژه را از این بخش بردار و نمونه عملی همان مفهوم را در «آزمایشگاه عملی» اجرا کن.</div></div>
+<div class="card"><h3>Cheat Sheet</h3><p>Prompt: نقش + هدف + مخاطب + جزئیات + محدودیت + خروجی</p><p>خطا: کجا + چه کردم + چه می‌خواستم + چه شد</p><p>تصویر: موضوع + سبک + رنگ غالب + «بدون نوشته» + کاربرد</p><div class="action-guide"><span class="guide-label">انجام بده</span> یکی از فرمول‌ها را انتخاب کن و همان را در تمرین‌های واقعی بالا وارد کن؛ Cheat Sheet برای استفاده است، نه فقط حفظ کردن.</div></div>
+<div class="card"><h3>منابع و انتشار</h3><p>نمونه‌های مطرح‌شده در جزوه: GitHub Pages، Netlify، Vercel، Replit، CodePen، MDN، W3Schools، Figma، Unsplash، Pexels، Flaticon و ابزارهای گفت‌وگویی AI.</p><div class="warning">قبل از ثبت‌نام یا انتشار، اطلاعات شخصی را وارد نکن و برای حساب‌های موردنیاز با والدین/استاد هماهنگ کن.</div><div class="action-guide"><span class="guide-label">انجام بده</span> قبل از انتشار، مسیر انتشار را در بخش «شبیه‌سازی Deploy» امتحان کن و سپس چک‌لیست امنیتی را مرور کن.</div></div>
+<div class="card"><h3>سؤالات پرتکرار</h3><div class="action-guide"><span class="guide-label">انجام بده</span> هر پاسخ را با یک آزمایش واقعی در سایت تطبیق بده؛ مخصوصاً Responsive و بررسی خروجی AI.</div><details><summary>برنامه‌نویسی بلد نیستم؛ می‌توانم سایت بسازم؟</summary><p>بله؛ چارچوب جزوه روی نقش طراح/کارگردان و فهم و بررسی خروجی AI تأکید دارد.</p></details><details><summary>چرا سایت موبایل خراب می‌شود؟</summary><p>دو علت رایج ذکرشده: نبود viewport و استفاده از عرض ثابت مثل 800px.</p></details><details><summary>AI همیشه درست می‌گوید؟</summary><p>نه. خروجی باید بررسی و راستی‌آزمایی شود.</p></details></div>
+<div class="card"><h3>پنج تمرین کلاسی</h3><ol><li>بهترین Prompt برای سایت فوتبال</li><li>منتقد طراحی: ۳ نکته مثبت + ۳ منفی + یک پیشنهاد</li><li>تعمیر سایت خراب</li><li>طراحی مجدد بدون تغییر ساختار</li><li>رقابت طراحی با موضوع مشترک</li></ol><p class="muted">تمرین زنجیره‌ای سه‌نفره نیز به‌عنوان فعالیت اضافه پیشنهاد شده است.</p><div class="action-guide"><span class="guide-label">انجام بده</span> یکی از تمرین‌ها را انتخاب کن و نتیجه را در پروژه خودت اجرا کن؛ هدف تولید یک خروجی قابل مشاهده است.</div></div>
+<div class="card"><h3>مسیر کامل</h3><div class="timeline"><div class="step"><b>۱</b>ایده</div><div class="step"><b>۲</b>Prompt</div><div class="step"><b>۳</b>طراحی</div><div class="step"><b>۴</b>ساخت</div><div class="step"><b>۵</b>بررسی</div><div class="step"><b>۶</b>اصلاح</div><div class="step"><b>۷</b>Debug</div><div class="step"><b>۸</b>تست/انتشار</div></div><div class="action-guide"><span class="guide-label">انجام بده</span> مراحل را از بالا به پایین دنبال کن و برای هر مرحله یک خروجی واقعی در سایت بساز.</div></div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="container">
+<h3>آزمایشگاه عملی فرانت‌اند با هوش مصنوعی</h3>
+<p class="muted">نسخه ارائه‌ای دانش‌آموزی؛ طراحی‌شده برای مرور و سنجش مباحث جزوه. محتوا به‌صورت خلاصه و بازطراحی‌شده ارائه شده و جایگزین خود جزوه نیست.</p>
+</div>
+</footer>
+<div class="progress-wrap"><b>پیشرفت آزمون: <span id="progressText">۰٪</span></b><div class="bar"><i id="progressBar"></i></div></div>
+<script>
+const chapters=[
+["فرانت‌اند چیست؟","عناصر قابل مشاهده و تعاملی سایت؛ تشبیه سالن رستوران.","منو، دکمه، عکس، متن، کارت و فرم کدام بخش‌اند؟","فرانت‌اند","بک‌اند","سرور","پایگاه داده",0],
+["ابزارهای AI","پنج دسته ابزار: گفت‌وگو، ساخت سایت، طراحی، تصویر و انتشار.","برای طراحی UI قبل از کدنویسی کدام ابزار مناسب‌تر است؟","Figma","GitHub Pages","JavaScript","Console",0],
+["نقش‌های AI","ایده‌پرداز، طراح، برنامه‌نویس، معلم، منتقد و تعمیرکار.","برای «سه ایراد طراحی سایت را بگو» کدام نقش مناسب‌تر است؟","منتقد","برنامه‌نویس","تعمیرکار","معلم",0],
+["Prompt چیست؟","Prompt دستور دقیق به AI است؛ هرچه مشخص‌تر، نتیجه کنترل‌پذیرتر.","کدام مورد جزو فرمول شش‌بخشی است؟","نقش","شانس","رمز عبور","نام فایل",0],
+["پیدا کردن ایده","ایده از علاقه شخصی، مشکل واقعی یا خودت می‌تواند شروع شود.","کدام گزینه منبع خوب ایده است؟","علاقه شخصی","اطلاعات خصوصی دیگران","کپی کامل یک سایت","موضوع نامناسب",0],
+["ساختار سایت","Navbar، Hero، About، Features، Gallery، Contact و Footer از اجزای استاندارد هستند.","Hero چه کاری انجام می‌دهد؟","در چند ثانیه موضوع سایت را معرفی می‌کند","فقط لینک‌های فوتر را می‌سازد","پایگاه داده را مدیریت می‌کند","فایل CSS را اجرا می‌کند",0],
+["UI و UX","UI ظاهر است؛ UX تجربه و راحتی کاربر هنگام استفاده.","کدام مورد بیشتر UX است؟","پیدا کردن راحت دکمه","کد رنگ دکمه","نوع فونت","سایه کارت",0],
+["رنگ، فونت و تایپوگرافی","رنگ حس می‌سازد و فونت روی خوانایی اثر دارد؛ برای فارسی فونت مناسب مهم است.","برای سایت فناوری، کدام حس با آبی هماهنگ‌تر است؟","اعتماد و فناوری","هشدار","رشد طبیعی","اشتها",0],
+["اجزای سایت مدرن","Hero، Navbar، Button، Card، Gallery، Modal، Hover، Responsive، Footer، CTA و...","CTA چیست؟","فراخوان عمل","پنجره خطا","پابرگ","فونت",0],
+["Wireframe","نقشه ساده قبل از رنگ و کدنویسی؛ نسخه موبایل و دسکتاپ را جدا تصور کن.","Wireframe بیشتر چه چیزی را مشخص می‌کند؟","جای بخش‌ها","کد JavaScript","کد رنگ نهایی","تصویر نهایی",0],
+["ساخت اولین سایت با AI","سه مرحله: ساختار، طراحی، سپس کدنویسی؛ برای تازه‌کارها یک فایل HTML+CSS+JS ساده است.","ترتیب بهتر شروع چیست؟","ساختار ← طراحی ← کدنویسی","کدنویسی ← حذف ساختار ← رنگ","انتشار ← ایده","تصویر ← Debug ← ایده",0],
+["اصلاح و بهبود","مشکل را دقیق نام ببر و یک تغییر کنترل‌شده در هر Prompt بده.","کدام درخواست بهتر است؟","فقط کارت‌ها را تغییر بده","قشنگ‌ترش کن","همه‌چیز را عوض کن","یه کم تغییر بده",0],
+["Responsive","سایت باید در موبایل، تبلت و کامپیوتر درست باشد و اسکرول افقی نداشته باشد.","برای موبایل معمولاً کدام چیدمان مناسب‌تر است؟","یک ستون","چهار ستون ثابت","عرض 800px","بدون viewport",0],
+["تصاویر و محتوا","عنوان، متن، تصویر و دکمه دیده‌شده‌های اصلی‌اند؛ از تصویر دارای مجوز یا تولید خودت استفاده کن.","در Prompt تصویر چرا «بدون نوشته» مهم است؟","متن تصویر AI ممکن است خراب باشد","برای سنگین‌تر شدن فایل","برای حذف رنگ","برای ساخت CSS",0],
+["انیمیشن و تعامل","Hover، Fade-in کوتاه، حرکت ۴ تا ۶ پیکسل، اسکرول نرم و منوی نرم؛ نه افراط.","کدام رفتار مناسب‌تر است؟","Hover کوتاه و ملایم","چرخش بی‌وقفه","صدای خودکار","انیمیشن چندثانیه‌ای همه عناصر",0],
+["Debug با AI","گزارش خطا: کجا + چه کردم + چه می‌خواستم + چه شد + کد.","بهتر است به AI بگویی «کار نمی‌کند»؟","خیر، جزئیات لازم است","بله، همیشه کافی است","فقط نام سایت را بده","فقط رنگ را بگو",0],
+["HTML","ساختار صفحه؛ تگ‌ها عنوان، متن، دکمه، تصویر، لینک و بخش را مشخص می‌کنند.","کدام مورد ساختار است؟","<h1>","color","alert","box-shadow",0],
+["CSS","ظاهر: رنگ، فونت، فاصله، گردی، سایه و چیدمان.","کدام ویژگی رنگ متن را تغییر می‌دهد؟","color","padding","margin","display",0],
+["JavaScript","رفتار: کلیک، منو، پیام، فرم و تعامل.","کدام کار JavaScript است؟","باز شدن Modal با کلیک","انتخاب فونت","ساخت تگ h1","رنگ پس‌زمینه",0],
+["فهم کد AI","هفت سؤال جادویی؛ لازم نیست همه کد را حفظ کنی، باید بتوانی بخوانی و تغییر کنترل‌شده بدهی.","برای کد طولانی چه بخواهیم؟","به پنج بخش تقسیم و توضیح بده","کل کد را حفظ کن","همه را حذف کن","فقط رنگ را عوض کن",0],
+["پروژه نهایی","سایت واقعی، فارسی/RTL، حداقل ۵ بخش، موبایل، تصویر/گالری و تعامل لازم.","کدام مورد شرط الزامی پروژه است؟","نمایش درست در موبایل","حتماً بازی آنلاین","حتماً دامنه پولی","حتماً صدها خط کد",0],
+["۱۶ گام پروژه","از انتخاب موضوع تا ارائه؛ انتخاب مخاطب، بخش‌ها، رنگ، فونت، Wireframe، ساخت، نقد، اصلاح، Responsive، انیمیشن، Debug، تست/انتشار.","گام ۱ چیست؟","انتخاب موضوع","انتشار","ارائه","Debug",0],
+["تست و نهایی‌سازی","محتوا، طراحی، امکانات و موبایل باید چک شوند؛ کاربر آزمایشی هم مفید است.","کدام مورد باید تست شود؟","همه دکمه‌ها","فقط Hero","فقط رنگ","فقط Footer",0],
+["انتشار","GitHub Pages، Netlify و Vercel در جزوه به‌عنوان گزینه‌های انتشار معرفی شده‌اند.","قبل از انتشار چه چیزی مهم است؟","تست در موبایل","حذف index.html","قرار دادن اطلاعات شخصی","خصوصی کردن همه فایل‌ها",0],
+["ارائه پروژه","حدود دو دقیقه: معرفی، هدف/مخاطب، نمایش، چالش و نقش AI، نکته پایانی.","اول ارائه چه می‌گویی؟","نام و موضوع","کد کامل","تمام مشکلات","منابع خارجی",0],
+["معیار ارزیابی","ایده ۱۵، طراحی ۲۰، AI ۲۰، توضیح ۱۵، Responsive ۱۰، خلاقیت ۱۰، ارائه ۱۰.","کدام دو معیار روی‌هم ۴۰ امتیاز دارند؟","طراحی و استفاده درست از AI","ایده و ارائه","Responsive و خلاقیت","توضیح و ارائه",0],
+["پرامپت‌های آماده","دسته‌هایی برای ایده، ساختار، UI، رنگ، فونت، ساخت، بهبود، کارت، موبایل، انیمیشن، نقد، Debug، توضیح کد، متن، تصویر و داوری.","برای بررسی ۱۰ مشکل UI/UX کدام نوع Prompt مناسب است؟","بررسی UI/UX","تولید تصویر","انتشار","فونت",0],
+["چک‌لیست دانش‌آموز","ایده، طراحی، سایت، AI، اخلاق/امنیت و ارائه باید بررسی شوند.","کدام مورد اخلاقی/امنیتی است؟","اطلاعات شخصی را در سایت نگذار","رمز عبور را منتشر کن","عکس خصوصی بگذار","نام مدرسه را عمومی کن",0],
+["تمرین‌های کلاسی","بهترین Prompt، منتقد، تعمیر سایت، طراحی مجدد و رقابت طراحی؛ تمرین زنجیره‌ای نیز پیشنهاد شده.","هدف تمرین «تعمیر سایت» چیست؟","Debug و گزارش دقیق خطا","انتخاب دامنه","ساخت بازی","انتخاب فونت",0],
+["مسیر کامل یادگیری","ایده → Prompt → طراحی → ساخت → بررسی → اصلاح → Responsive → Debug → تست → انتشار → ارائه.","بعد از بررسی چه کاری معمولاً انجام می‌دهیم؟","اصلاح","فراموش کردن پروژه","حذف محتوا","انتشار فوری",0],
+["جمع‌بندی نهایی","ده مهارت کلیدی و اصل: AI کنار طراح است اما تصمیم نهایی با طراح است.","کدام جمله با جمع‌بندی هماهنگ است؟","نتیجه AI را بررسی کن","هر خروجی AI را بدون بررسی قبول کن","Prompt مهم نیست","تست موبایل لازم نیست",0]
+];
+
+const chaptersEl=document.getElementById('chapterGrid');
+chapters.forEach((c,i)=>{
+ const d=document.createElement('article'); d.className='card chapter-card chapter'; d.id='ch'+(i+1);
+ d.innerHTML=`<span class="chapter-no">مبحث ${i+1}</span><h3>${c[0]}</h3><p>${c[1]}</p><span class="tag">نمونه عملی + توضیح</span>`;
+ chaptersEl.appendChild(d);
+});
+
+function q(btn,ok,msg){const box=btn.parentElement;box.querySelectorAll('.option').forEach(x=>x.disabled=true);btn.classList.add(ok?'correct':'wrong');box.querySelector('.feedback').textContent=msg;track();}
+
+function track(){const manual=document.querySelectorAll('#steps input:checked').length,checks=document.querySelectorAll('#finalChecks input:checked').length,p=Math.min(100,Math.round((manual/16)*90+(checks/10)*10));document.getElementById('progressText').textContent=p+'٪';document.getElementById('progressBar').style.width=p+'%'}
+function buildPrompt(){const prRole=document.getElementById('prRole'),prGoal=document.getElementById('prGoal'),prAudience=document.getElementById('prAudience'),prDetails=document.getElementById('prDetails'),prLimits=document.getElementById('prLimits'),prOutput=document.getElementById('prOutput'),promptText=document.getElementById('promptText'),promptOut=document.getElementById('promptOut');const t=`تو ${prRole.value} هستی.\nهدف: ${prGoal.value}.\nمخاطب: ${prAudience.value}.\nجزئیات: ${prDetails.value}.\nمحدودیت: ${prLimits.value}.\nخروجی: ${prOutput.value}.`;promptText.textContent=t;promptOut.style.display='block'}
+async function copyPrompt(){const text=document.getElementById('promptText')?.textContent||'';if(!text)return;try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text)}else{const ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.focus();ta.select();document.execCommand('copy');ta.remove()}alert('Prompt کپی شد.')}catch(e){alert('کپی خودکار در این مرورگر در دسترس نیست؛ متن را دستی انتخاب و کپی کن.')}}
+function buildBug(){const bugWhere=document.getElementById('bugWhere'),bugDid=document.getElementById('bugDid'),bugWant=document.getElementById('bugWant'),bugGot=document.getElementById('bugGot'),bugOut=document.getElementById('bugOut');bugOut.style.display='block';bugOut.innerHTML=`<b>گزارش Debug:</b><br>کجا: ${bugWhere.value}<br>چه کردم: ${bugDid.value}<br>چه می‌خواستم: ${bugWant.value}<br>چه شد: ${bugGot.value}`}
+
+const stepNames=["انتخاب موضوع","ایده‌پردازی با AI","انتخاب مخاطب","مشخص کردن بخش‌ها","انتخاب رنگ","انتخاب فونت","Wireframe","ساخت سایت با AI","بررسی نتیجه","گرفتن نظر AI","اصلاح طراحی","Responsive کردن","افزودن انیمیشن","رفع خطا","تست و انتشار","ارائه"];
+document.getElementById('steps').innerHTML=stepNames.map((x,i)=>`<label><input type="checkbox" data-step="${i}"> گام ${i+1}: ${x}</label>`).join('');
+document.getElementById('steps').addEventListener('change',track);
+function saveSteps(){try{localStorage.setItem('steps',JSON.stringify([...document.querySelectorAll('#steps input')].map(x=>x.checked?1:0)));alert('پیشرفت ذخیره شد.')}catch(e){alert('ذخیره‌سازی در این مرورگر در دسترس نیست.')}}
+let saved=null;try{saved=localStorage.getItem('steps')}catch(e){} if(saved){let arr=[];try{arr=JSON.parse(saved)}catch(e){arr=saved.split(',')}arr.forEach((v,i)=>{const x=document.querySelectorAll('#steps input')[i];if(x)x.checked=String(v)==='1'})}
+
+const rub=[["ایده",15],["طراحی ظاهری",20],["استفاده درست از AI",20],["توضیح پروژه",15],["Responsive",10],["خلاقیت",10],["ارائه",10]];
+document.getElementById('rubric').innerHTML=rub.map((r,i)=>`<div><label>${r[0]} (حداکثر ${r[1]})</label><input class="scoreIn" type="number" min="0" max="${r[1]}" value="0" oninput="calcRubric()"></div>`).join('');
+function calcRubric(){let s=[...document.querySelectorAll('.scoreIn')].reduce((a,x)=>a+(+x.value||0),0);document.getElementById('rubricScore').textContent=s+' / 100'}
+const fc=["موضوع و مخاطب مشخص است","محتوای کافی دارم","رنگ و فونت هماهنگ‌اند","سایت شلوغ نیست","کامپیوتر درست است","موبایل درست است","دکمه‌ها و لینک‌ها کار می‌کنند","تصاویر درست نمایش داده می‌شوند","از AI صادقانه و دقیق استفاده کرده‌ام","نسخه پشتیبان و ارائه آماده است"];
+document.getElementById('finalChecks').innerHTML=fc.map((x,i)=>`<label><input type="checkbox" onchange="track()"> ${x}</label>`).join('');
+function finalCheck(){const finalResult=document.getElementById('finalResult');const n=document.querySelectorAll('#finalChecks input:checked').length;finalResult.innerHTML=n===10?'<div class="tip"><b>آماده!</b> همه موارد چک‌لیست تستی تیک خورده‌اند.</div>':`<div class="warning"><b>${n} از ۱۰</b> مورد انجام شده. موارد باقی‌مانده را قبل از تحویل بررسی کن.</div>`}
+
+let timer=120,timerId=null;function renderTimer(){let m=String(Math.floor(timer/60)).padStart(2,'0'),s=String(timer%60).padStart(2,'0');document.getElementById('timer').textContent=m+':'+s}
+function timerStart(){if(timerId)return;timerId=setInterval(()=>{if(timer<=0){clearInterval(timerId);timerId=null;alert('دو دقیقه تمام شد!');return}timer--;renderTimer()},1000)}
+function timerReset(){clearInterval(timerId);timerId=null;timer=120;renderTimer()}
+renderTimer();track();
+
+function demoToast(msg){alert(msg)}
+function toolDemo(v){const m={'گفت‌وگوی AI':'ایده، توضیح، نقد و Prompt.','طراحی UI':'Wireframe و طراحی رابط.','تصویرسازی AI':'ساخت تصویر مناسب Hero یا بخش‌های سایت.','انتشار سایت':'قرار دادن سایت روی اینترنت.'};document.getElementById('toolDemo').textContent=m[v]||'یک گزینه انتخاب کن.'}
+function roleDemo(v){const m={ایده‌پرداز:'چند ایده متفاوت برای پروژه پیشنهاد می‌دهد.',منتقد:'ایرادهای UI/UX را پیدا می‌کند.',برنامه‌نویس:'ساختار HTML/CSS/JS تولید می‌کند.',تعمیرکار:'خطا را از روی توضیح دقیق بررسی و اصلاح می‌کند.'};document.getElementById('roleDemo').textContent=m[v]}
+function promptCompare(){document.getElementById('promptCompare').innerHTML='<b>نتیجه:</b> Prompt دقیق‌تر محدودیت و خروجی را مشخص کرده؛ بنابراین احتمال گرفتن نتیجه کنترل‌پذیر بیشتر است.'}
+function ideaDemo(){const v=document.getElementById('ideaInput').value.trim();document.getElementById('ideaDemo').textContent=v?'ایده پیشنهادی: یک ابزار/سایت کوچک برای حل این مشکل بساز و مخاطب و مهم‌ترین قابلیت را مشخص کن.':'اول یک مشکل واقعی بنویس.'}
+function uxDemo(){document.getElementById('uxResult').textContent='دکمه واضح‌تر، اندازه مناسب‌تر و متن مشخص‌تر باعث می‌شود کاربر سریع‌تر بفهمد چه کاری انجام می‌شود.'}
+function colorDemo(c){const el=document.getElementById('colorStage');el.style.background=c;el.style.color=c==='#ffd166'?'#141a33':'#fff'}
+function fontDemo(v){document.getElementById('colorStage').style.fontFamily=v}
+function openModal(){document.getElementById('globalModal').classList.remove('hidden')}
+function closeModal(){document.getElementById('globalModal').classList.add('hidden')}
+function wireToggle(){document.querySelector('.wire-live').classList.toggle('mobile')}
+function pipeline(i){const a=['اول هدف، مخاطب و بخش‌های سایت مشخص می‌شوند.','بعد رنگ، فونت، چیدمان و Wireframe شکل می‌گیرد.','در آخر HTML/CSS/JS ساخته و تست می‌شود.'];document.getElementById('pipelineOut').textContent=a[i]}
+function improve(v){const b=document.getElementById('improveBox');b.className='improve-box improve-'+v}
+function setViewport(v){const s=document.getElementById('responsiveStage');s.className='responsive-stage '+v+'-v';const t={mobile:'موبایل: عناصر یک‌ستونه و دکمه مناسب لمس.',tablet:'تبلت: معمولاً دو ستون مناسب است.',desktop:'کامپیوتر: چند ستون می‌تواند کنار هم قرار بگیرد.'};document.getElementById('responsiveText').textContent=t[v]}
+function contentDemo(){document.getElementById('contentHeroTitle').textContent=document.getElementById('titleInput').value||'عنوان Hero'}
+function fixBug(){const b=document.getElementById('brokenBtn');b.onclick=()=>document.getElementById('bugStatus').textContent='✓ حالا کلیک کار می‌کند!';document.getElementById('fixOut').textContent='خطا پیدا شد: دکمه رویداد کلیک نداشت. با اضافه کردن onclick رفتار اصلاح شد.'}
+function cssLive(v){document.getElementById('cssCodeLiveBox').style.padding=v+'px'}
+let cval=5;function counter(n){cval=Math.max(0,cval+n);document.getElementById('counterVal').textContent=cval}
+function sumDemo(){document.getElementById('sumOut').textContent='نتیجه JavaScript: ۵ + ۳ = ۸'}
+function projectCheck(){document.getElementById('projectOut').textContent='۵ معیار نمونه بررسی شد: RTL ✓، بخش‌ها ✓، تصویر/گالری ✓، تعامل ✓، Responsive ✓'}
+const stepsText=['انتخاب موضوع','ایده‌پردازی با AI','انتخاب مخاطب','مشخص کردن بخش‌ها','انتخاب رنگ','انتخاب فونت','Wireframe','ساخت سایت با AI','بررسی نتیجه','گرفتن نظر AI','اصلاح طراحی','Responsive کردن','افزودن انیمیشن','رفع خطا','تست و انتشار','ارائه'];
+function stepDemo(v){document.getElementById('stepDemo').innerHTML='<b>گام '+v+'</b><span>'+stepsText[v-1]+'</span>'}
+let tested=[false,false,false];function testOne(i){tested[i]=true;document.getElementById('testReport').textContent='تست شده: '+tested.filter(Boolean).length+' از ۳ دکمه. '+(tested.every(Boolean)?'همه تست شدند ✓':'هنوز چند مورد باقی مانده.')}
+function deployDemo(){document.getElementById('deployOut').textContent='شبیه‌سازی موفق: فایل‌های سایت از محیط محلی به یک آدرس عمومی منتقل شدند. در انتشار واقعی باید لینک را در موبایل هم تست کنی.'}
+function present(i){const a=['نام پروژه، موضوع و چیزی که ساخته‌ای.','چرا این سایت را ساختی و مخاطبش چه کسی است؟','سخت‌ترین بخش یا خطایی که با آن روبه‌رو شدی.','AI کجا کمک کرد و تو چگونه خروجی را بررسی کردی؟'];document.getElementById('presentOut').textContent=a[i]}
+function judgeDemo(){const r=[...document.querySelectorAll('.rating-row input')].map(x=>+x.value);document.getElementById('judgeOut').textContent='میانگین امتیاز: '+(r.reduce((a,b)=>a+b,0)/r.length).toFixed(1)+' از ۱۰'}
+function readyPrompt(){const m={'سایت ورزشی':'برای یک سایت ورزشی فارسی RTL، Hero، کارت تیم‌ها، نتایج، CTA و طراحی Responsive بساز.','سایت آموزشی':'برای دانش‌آموزان یک سایت آموزشی فارسی RTL با Hero، درس‌ها، کارت‌ها، تمرین و Footer طراحی کن.','سایت نجوم':'یک سایت نجوم فارسی RTL با Hero تصویری، موضوعات نجومی، گالری و بخش اطلاعات بساز.','سایت معرفی بازی':'یک سایت معرفی بازی فارسی RTL با Hero، ویژگی‌ها، گالری، سیستم CTA و Responsive بساز.'};document.querySelector('#readyPrompt code').textContent=m[document.getElementById('promptType').value]}
+function checkPractical(){const n=document.querySelectorAll('.practical-check input:checked').length;document.getElementById('practicalCheckOut').textContent=Math.round(n/5*100)+'٪ آمادگی'}
+function criticDemo(){const v=document.getElementById('criticInput').value.trim();document.getElementById('criticOut').textContent=v?'نقد ثبت شد. حالا از AI بخواه فقط بر اساس همین نقد، یک نسخه اصلاحی پیشنهاد دهد.':'اول نقدت را بنویس.'}
+let cycle=0;function cycleNext(){const a=['ایده','Prompt','طراحی','ساخت','بررسی','اصلاح','تست','انتشار'];document.getElementById('cycleOut').textContent='مرحله فعلی: '+a[cycle%a.length];cycle++}
+function aiFinal(ok){document.getElementById('aiFinalOut').textContent=ok?'نه؛ خروجی AI ممکن است اشتباه باشد.':'دقیقاً؛ خروجی را بررسی، تست و در صورت نیاز اصلاح کن.'}
+
+
+function htmlElementDemo(btn){const out=document.getElementById('htmlElementResult');out.textContent='✓ Button HTML واقعاً کلیک شد؛ این عنصر در صفحه وجود دارد و رویداد تعامل را نشان داد.';btn.classList.add('demo-active');setTimeout(()=>btn.classList.remove('demo-active'),450)}
+function setTheme(theme){theme=theme==='dark'?'dark':'light';document.body.classList.toggle('theme-dark',theme==='dark');localStorage.setItem('siteTheme',theme);['themeLight','themeDark'].forEach(id=>document.getElementById(id)?.classList.remove('active'));document.getElementById(theme==='dark'?'themeDark':'themeLight')?.classList.add('active')}
+(function(){const saved=localStorage.getItem('siteTheme');setTheme(saved==='dark'?'dark':'light')})();
+const examQuestions=chapters.map(c=>({topic:c[0],question:c[2],options:c.slice(3,7),correct:c[7]}));let examPool=[],examIndex=0,examCorrect=0,examAnswered=false;
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startExam(){if(!examQuestions.length)return;examPool=shuffle(examQuestions).slice(0,Math.min(15,examQuestions.length));examIndex=0;examCorrect=0;document.getElementById('examStart').style.display='none';document.getElementById('examResult').style.display='none';document.getElementById('examArea').style.display='block';renderExamQuestion();document.getElementById('exam').scrollIntoView({behavior:'smooth',block:'start'})}
+function renderExamQuestion(){const q=examPool[examIndex],correctText=q.options[q.correct],opts=shuffle(q.options);examAnswered=false;document.getElementById('examCounter').textContent=`سؤال ${examIndex+1} از ${examPool.length}`;document.getElementById('examBar').style.width=(examIndex/examPool.length*100)+'%';document.getElementById('examScoreLive').textContent=examCorrect+' درست';document.getElementById('examNext').disabled=true;document.getElementById('examNext').textContent=examIndex===examPool.length-1?'دیدن نتیجه':'سؤال بعدی';document.getElementById('examQuestion').innerHTML=`<div class="exam-question"><span class="tag">${q.topic}</span><h3>${q.question}</h3>${opts.map(t=>`<button class="exam-option" data-correct="${t===correctText}" onclick="answerExam(this)">${t}</button>`).join('')}<div id="examFeedback" class="feedback"></div></div>`}
+function answerExam(btn){if(examAnswered)return;examAnswered=true;const buttons=btn.parentElement.querySelectorAll('.exam-option');buttons.forEach(b=>b.disabled=true);if(btn.dataset.correct==='true'){examCorrect++;btn.classList.add('correct');document.getElementById('examFeedback').textContent='✓ درست!'}else{btn.classList.add('wrong');buttons.forEach(b=>{if(b.dataset.correct==='true')b.classList.add('correct')});document.getElementById('examFeedback').textContent='✗ اشتباه؛ پاسخ درست با رنگ سبز مشخص شد.'}document.getElementById('examScoreLive').textContent=examCorrect+' درست';document.getElementById('examNext').disabled=false}
+function nextExamQuestion(){if(!examAnswered)return;if(examIndex<examPool.length-1){examIndex++;renderExamQuestion()}else finishExam()}
+function finishExam(){const total=examPool.length;if(!total){restartExam();return}const p=Math.round(examCorrect/total*100);document.getElementById('examArea').style.display='none';document.getElementById('examResult').style.display='block';document.getElementById('examResult').innerHTML=`<div class="exam-result"><span class="tag">نتیجه آزمون</span><div class="exam-score">${p}٪</div><h3>${examCorrect} پاسخ درست از ${total}</h3><p class="muted">${p>=90?'عملکرد فوق‌العاده 👏':p>=70?'خیلی خوب؛ چند نکته را مرور کن.':p>=50?'متوسط؛ مرور دوباره کمک می‌کند.':'پیشنهاد می‌کنم مباحث را از آزمایشگاه عملی مرور کنی.'}</p><div class="actions" style="justify-content:center"><button class="btn primary" onclick="restartExam()">آزمون دوباره</button><a class="btn secondary" href="#chapters">مرور مباحث</a></div></div>`}
+function restartExam(){examPool=[];examIndex=0;examCorrect=0;examAnswered=false;document.getElementById('examStart').style.display='block';document.getElementById('examArea').style.display='none';document.getElementById('examResult').style.display='none'}
+
+
+// Clear visual feedback for every practical interaction.
+document.addEventListener('click', function(e){
+  const el=e.target.closest('button,.option,.mini-ui button,.btn');
+  if(!el || el.disabled) return;
+  el.classList.add('demo-active');
+  setTimeout(()=>el.classList.remove('demo-active'),450);
+});
+</script>
+</body>
+</html>
